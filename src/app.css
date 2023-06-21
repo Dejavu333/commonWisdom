@@ -1,0 +1,47 @@
+:root {
+  --lightColor: rgb(237, 237, 237);
+  --fontColor: rgba(0, 0, 0, 0.8);
+  --activeColor: rgba(100, 255, 193, 0.5);
+  /* --activeColor: rgba(214, 39, 40, 0.2); */
+  --redColor: rgb(214, 39, 40);
+  --blueColor: rgb(31, 119, 180);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  color: var(--fontColor);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: var(--fontColor);
+}
+
+#mindmap {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+
+line {
+  stroke: var(--lightColor);
+  stroke-width: 6.5;
+  stroke-dasharray: 2 4;
+  
+}
+path {
+  opacity: 0.5;
+  overflow: hidden;
+  stroke-width: 13;
+  fill: none;
+}
+
+foreignObject {
+}
+foreignObject > div {
+
+}
+.active {
+  background-color: var(--activeColor);
+}
+
+
