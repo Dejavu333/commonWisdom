@@ -1,21 +1,20 @@
 <script>
-    import { scale } from "svelte/transition";
-    import { quintOut } from "svelte/easing";
+import { scale } from "svelte/transition";
+import { quintOut } from "svelte/easing";
 
     //--------------------------------------------------
     // props
     //--------------------------------------------------
     export let visible = false;
-    export let subTopic = "";
-    let infoAboutSubTopic = "";
-
-    $: readInfosByTopic(subTopic);
-
     $: if (visible) {
         window.addEventListener("keydown", closeInfoWindow);
     } else {
         window.removeEventListener("keydown", closeInfoWindow);
     }
+
+    export let subTopic = "";
+    let infoAboutSubTopic = "";
+    $: readInfosByTopic(subTopic);
 
     //--------------------------------------------------
     // functions
@@ -31,7 +30,6 @@
             visible = false;
         }
     }
-
 </script>
 <!------------------------------------------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------->
