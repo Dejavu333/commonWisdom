@@ -1,16 +1,18 @@
 <script>
-	import { Transformer } from 'markmap-lib';
-	import * as markmap from 'markmap-view';
+  import { Transformer } from 'markmap-lib';
+  import * as markmap from 'markmap-view';
   import { onMount } from 'svelte';
   import InfoWindow from './InfoWindow.svelte';
   import markdownsWithOptions from '../../public/markdown.js';
 
+  //--------------------------------------------------
+  // props
+  //--------------------------------------------------
   export let chosenTopic = "SIEMENS";
-    
-onMount(() => {   //todo runtimed
-  const MARKDOWN = markdownsWithOptions[chosenTopic].markdownStr; 
-  //todo get from api if app gets bigger
-  console.log(MARKDOWN);
+
+  
+  onMount(() => {   
+  const MARKDOWN = markdownsWithOptions[chosenTopic].markdownStr; console.log(MARKDOWN); //todo get from api if app gets bigger//todo const markdownsWithOptions = getMarkdownWithOptions(chosenTopic);
   const INITIALEXPANDLEVEL = Number(markdownsWithOptions[chosenTopic].initialExpandLevel);
   const COLORFREEZELEVEL = Number(markdownsWithOptions[chosenTopic].colorFreezeLevel);
 
@@ -32,7 +34,7 @@ onMount(() => {   //todo runtimed
 
 
 let lastSelectedElem = null;
-let selectedTopic = "";
+let selectedSubTopic = "";
 let isInfoWindowVisible = false;
 
 function highlightTopic(elem) {
@@ -44,18 +46,18 @@ function highlightTopic(elem) {
   lastSelectedElem.classList.add("active");
 }
 
-function selectTopic(event) {
+function selectSubTopic(event) {
   const elem = event.target;
   if(!elem.hasAttribute("xmlns")) return;
   highlightTopic(elem);
-  selectedTopic = elem.innerText;
+  selectedSubTopic = elem.innerText;
   isInfoWindowVisible = false; isInfoWindowVisible = true; //force rerender
 }
 </script>
 <!------------------------------------------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------->
-<svg id="markmap" on:click={selectTopic} style="width: 100%; height: 100vh" ></svg>
-<InfoWindow topic={selectedTopic} visible={isInfoWindowVisible}/>
+<svg id="markmap" on:click={selectSubTopic} style="width: 100%; height: 100vh" ></svg>
+<InfoWindow subTopic={selectedSubTopic} visible={isInfoWindowVisible}/>
 <!------------------------------------------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------->
 <style>
