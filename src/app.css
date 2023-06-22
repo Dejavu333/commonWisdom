@@ -2,7 +2,6 @@
   --lightColor: rgb(237, 237, 237);
   --fontColor: rgba(0, 0, 0, 0.8);
   --activeColor: rgba(100, 255, 193, 0.5);
-  /* --activeColor: rgba(214, 39, 40, 0.2); */
   --redColor: rgb(214, 39, 40);
   --blueColor: rgb(31, 119, 180);
 }
@@ -38,10 +37,12 @@ path {
 foreignObject {
 }
 foreignObject > div {
-
 }
 .active {
   background-color: var(--activeColor);
 }
 
-
+#infosContainer>img {
+  width: 100%;
+  height: auto;
+}

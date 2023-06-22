@@ -19,7 +19,7 @@ import { quintOut } from "svelte/easing";
     //--------------------------------------------------
     // functions
     //--------------------------------------------------
-    import infos from "../../public/infos.json";  //todo ged infos from api by subTopic if the app gets bigger
+    import infos from "../../public/subTopicInfos.json";  //todo ged infos from api by subTopic if the app gets bigger
     function readInfosByTopic(subTopic) {
         if (!subTopic) return;
         infos[subTopic] ? infoAboutSubTopic = infos[subTopic] : infoAboutSubTopic = "No infos about this subTopic yet";
@@ -37,7 +37,7 @@ import { quintOut } from "svelte/easing";
 <div id="infosContainer" transition:scale={{ delay: 250, duration: 300, easing: quintOut }}>
     <button on:click={closeInfoWindow} title="esc">X</button>
     <h1>{subTopic}</h1>
-    {infoAboutSubTopic}
+    {@html infoAboutSubTopic}
 </div>
 {/if}
 <!------------------------------------------------------------------------------------------------------->
@@ -70,4 +70,5 @@ import { quintOut } from "svelte/easing";
         overflow:scroll;
         padding: 20px;
     }
+
 </style>
