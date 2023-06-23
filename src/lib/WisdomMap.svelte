@@ -7,18 +7,21 @@
   //--------------------------------------------------
   // props
   //--------------------------------------------------
-  export let chosenTopic = "SIEMENS";
-  let lastSelectedElem = null;
-  let selectedSubTopic = "";
-  let isInfoWindowVisible = false;
+  export let _ChosenTopic = "";
+  let _lastSelectedElem = null;
+  let _selectedSubTopic = "";
+  let _isInfoWindowVisible = false;
+  let _wisdomMapObject = null;
 
-  import markdownsWithOptions from '../../public/markdown.js';
-  const MARKDOWN = markdownsWithOptions[chosenTopic].markdownStr; console.log(MARKDOWN); //todo get from api if app gets bigger//todo const markdownsWithOptions = getMarkdownWithOptions(chosenTopic);
-  const INITIALEXPANDLEVEL = Number(markdownsWithOptions[chosenTopic].initialExpandLevel);
-  const COLORFREEZELEVEL = Number(markdownsWithOptions[chosenTopic].colorFreezeLevel);
+  import markdownsWithOptions from '../../public/markdownWithOptions.js';
+  const markdownStr = markdownsWithOptions[_ChosenTopic].markdownStr; console.log(markdownStr); //todo get from api if app gets bigger//todo const markdownsWithOptions = getMarkdownWithOptions(_ChosenTopic);
+  const initialExpandLevel = Number(markdownsWithOptions[_ChosenTopic].initialExpandLevel);
+  const colorFreezeLevel = Number(markdownsWithOptions[_ChosenTopic].colorFreezeLevel);
 
-  onMount(() => {
-    initWisdomMap(MARKDOWN, INITIALEXPANDLEVEL, COLORFREEZELEVEL);
+  onMount(() => {    
+    window.addEventListener("click", selectSubTopic);
+    window.addEventListener("keyup", f);
+    initWisdomMap(markdownStr, initialExpandLevel, colorFreezeLevel);
   });
 
   //--------------------------------------------------
@@ -38,32 +41,80 @@
 
     // 2. create markmap
     const options = markmap.deriveOptions( {colorFreezeLevel: p_colorFreezeLevel, initialExpandLevel: p_initialExpandLevel} );
-    Markmap.create('#markmap', options, root);
+    _wisdomMapObject = Markmap.create('#markmap', options, root);
+    console.log(_wisdomMapObject);
   }
 
   function highlightTopic(elem) {
-    if (lastSelectedElem) {
-      lastSelectedElem.classList.remove("active");
+    if (_lastSelectedElem) {
+      _lastSelectedElem.classList.remove("active");
     }
     //// const underline = e.target.parentNode.parentNode.children[0];
-    lastSelectedElem = elem;
-    lastSelectedElem.classList.add("active");
+    _lastSelectedElem = elem;
+    _lastSelectedElem.classList.add("active");
   }
 
   function selectSubTopic(event) {
-    const elem = event.target;
+    let elem = event.target;
     if(!elem.hasAttribute("xmlns")) return;
     highlightTopic(elem);
-    selectedSubTopic = elem.innerText;
-    isInfoWindowVisible = false; isInfoWindowVisible = true; //forces rerender
+    _selectedSubTopic = elem.innerText;
+    _isInfoWindowVisible = false; _isInfoWindowVisible = true; //forces rerender
   }
+
+  function f(e) {
+    //sadpaths
+    if (e.key !== "ArrowUp" && e.key !== "ArrowDown" && e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+    const rootNode = _wisdomMapObject.state.data;
+    const n = traverseGraph(rootNode);
+    if (n===undefined) return;
+    // // console.log(n);
+
+    //select the one next from the children
+    const currentlyShownNodes = document.querySelectorAll("foreignObject>div");
+
+
+    //happy path
+    // switch (e.key) {
+    //   case "ArrowUp":
+        
+    //   case "ArrowDown":
+
+    //   case "ArrowLeft":
+    //     highlightTopic(n.state.el.parentElement)
+
+    //   case "ArrowRight":
+    //     highlightTopic(n.state.el.parentElement)
+    // }
+  }
+
+  function traverseGraph(rootNode) {
+      //base case I.
+      if(rootNode.content === _lastSelectedElem.innerText) return rootNode;
+      if(rootNode.children) {
+        rootNode.children.forEach(n => {
+          //base case II.
+          if(n.content === _lastSelectedElem.innerText) {
+            console.log(n);
+            return n;
+          }
+          //recursive case
+          else {
+            traverseGraph(n);
+          }
+        });
+      }
+    }
+
+
+
 </script>
 <!------------------------------------------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------->
-<svg id="markmap" on:click={selectSubTopic} style="width: 100%; height: 100vh" ></svg>
-<InfoWindow subTopic={selectedSubTopic} visible={isInfoWindowVisible}/>
+<svg id="markmap" style="width: 100%; height: 100vh" ></svg>
+<InfoWindow _SubTopic={_selectedSubTopic} _Visible={_isInfoWindowVisible}/>
 <!------------------------------------------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------->
 <style>
-  
+
 </style>

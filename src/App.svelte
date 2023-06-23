@@ -1,12 +1,12 @@
 <script>
   import WisdomMap from './lib/WisdomMap.svelte';
   
-  const urlTopicRoute = window.location.pathname.split("/").pop();
+  const TOPIC_ROUTE = window.location.pathname.split("/").pop().toLocaleLowerCase();
   
   </script>
   <!------------------------------------------------------------------------------------------------------->
   <!------------------------------------------------------------------------------------------------------->
-  <WisdomMap chosenTopic={urlTopicRoute}/>
+  <WisdomMap _ChosenTopic={TOPIC_ROUTE}/>
   <!------------------------------------------------------------------------------------------------------->
   <!------------------------------------------------------------------------------------------------------->
   <style>

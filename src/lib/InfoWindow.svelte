@@ -5,38 +5,44 @@ import { quintOut } from "svelte/easing";
     //--------------------------------------------------
     // props
     //--------------------------------------------------
-    export let visible = false;
-    $: if (visible) {
-        window.addEventListener("keydown", closeInfoWindow);
+    export let _Visible = false;
+    $: if (_Visible) {
+        window.addEventListener("keydown", handleEsc);
     } else {
-        window.removeEventListener("keydown", closeInfoWindow);
+        window.removeEventListener("keydown", handleEsc);
     }
 
-    export let subTopic = "";
+    export let _SubTopic = "";
     let infoAboutSubTopic = "";
-    $: readInfosByTopic(subTopic);
+    $: readInfosByTopic(_SubTopic);
 
     //--------------------------------------------------
     // functions
     //--------------------------------------------------
-    import infos from "../../public/subTopicInfos.json";  //todo ged infos from api by subTopic if the app gets bigger
-    function readInfosByTopic(subTopic) {
-        if (!subTopic) return;
-        infos[subTopic] ? infoAboutSubTopic = infos[subTopic] : infoAboutSubTopic = "No infos about this subTopic yet";
+    import infos from "../../public/subTopicInfos.json";  //todo ged infos from api by _SubTopic if the app gets bigger
+    function readInfosByTopic(_SubTopic) {
+        if (!_SubTopic) return;
+        infos[_SubTopic] ? infoAboutSubTopic = infos[_SubTopic] : infoAboutSubTopic = "No infos about this subtopic yet";
     }
 
-    function closeInfoWindow(event) {
+    function handleEsc(event) {
         if (event.key === "Escape") {
-            visible = false;
+            closeInfoWindow();
         }
     }
+
+    function closeInfoWindow() {
+        _Visible = false;
+    }
+
+
 </script>
 <!------------------------------------------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------->
-{#if visible}
+{#if _Visible}
 <div id="infosContainer" transition:scale={{ delay: 250, duration: 300, easing: quintOut }}>
     <button on:click={closeInfoWindow} title="esc">X</button>
-    <h1>{subTopic}</h1>
+    <h1>{_SubTopic}</h1>
     {@html infoAboutSubTopic}
 </div>
 {/if}
