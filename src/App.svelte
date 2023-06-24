@@ -1,12 +1,17 @@
 <script>
   import WisdomMap from './lib/WisdomMap.svelte';
   
-  const TOPIC_ROUTE = window.location.pathname.split("/").pop().toLocaleLowerCase();
-  
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+
+  // Get the value of a specific parameter
+  const TOPIC = urlParams.get('topic');
+  console.log("topic is: " + TOPIC);
+
   </script>
   <!------------------------------------------------------------------------------------------------------->
   <!------------------------------------------------------------------------------------------------------->
-  <WisdomMap _ChosenTopic={TOPIC_ROUTE}/>
+  <WisdomMap _ChosenTopic={TOPIC}/>
   <!------------------------------------------------------------------------------------------------------->
   <!------------------------------------------------------------------------------------------------------->
   <style>
