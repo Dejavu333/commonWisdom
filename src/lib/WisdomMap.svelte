@@ -20,7 +20,7 @@
 
   onMount(() => {    
     window.addEventListener("click", selectSubTopic);
-    window.addEventListener("keyup", f);
+    window.addEventListener("keyup", selectSubTopicWithArrows);
     initWisdomMap(markdownStr, initialExpandLevel, colorFreezeLevel);
   });
 
@@ -62,52 +62,50 @@
     _isInfoWindowVisible = false; _isInfoWindowVisible = true; //forces rerender
   }
 
-  function f(e) {
-    //sadpaths
-    if (e.key !== "ArrowUp" && e.key !== "ArrowDown" && e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
-    const rootNode = _wisdomMapObject.state.data;
-    const n = traverseGraph(rootNode);
-    if (n===undefined) return;
-    // // console.log(n);
+  // // function o(s) {
+  // //   console.log(s);
+  // // }
 
-    //select the one next from the children
-    const currentlyShownNodes = document.querySelectorAll("foreignObject>div");
-
-
-    //happy path
-    // switch (e.key) {
-    //   case "ArrowUp":
-        
-    //   case "ArrowDown":
-
-    //   case "ArrowLeft":
-    //     highlightTopic(n.state.el.parentElement)
-
-    //   case "ArrowRight":
-    //     highlightTopic(n.state.el.parentElement)
-    // }
+  function selectSubTopicWithArrows(e) {
+    if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+      if (!_lastSelectedElem) return;
+      let currentDataPath =_lastSelectedElem.parentNode.parentNode.getAttribute("data-path");
+      let targetDataPath = calcTargetDataPath(currentDataPath, e);
+  // // o(targetDataPath);
+      const temp = Array.from(document.getElementsByTagName('g')).filter(el => el.getAttribute('data-path') === targetDataPath)[0];
+      const targetElem = Array.from(temp.children).filter(el => el.tagName === 'foreignObject')[0].children[0];
+  // // o(targetElem);
+      if (!targetElem) return;
+      highlightTopic(targetElem);
+      _selectedSubTopic = targetElem.innerText;
+    }
+    else if(e.key === "ArrowDown" || e.key === "ArrowUp") {
+      if (!_lastSelectedElem) return;
+      let currentDataPath =_lastSelectedElem.parentNode.parentNode.getAttribute("data-path");
+      let targetElem = Array.from(calcTargetElem(currentDataPath, e).children).filter(el => el.tagName === 'foreignObject')[0].children[0];
+      if (!targetElem) return;
+      highlightTopic(targetElem);
+      _selectedSubTopic = targetElem.innerText;
+    }
   }
 
-  function traverseGraph(rootNode) {
-      //base case I.
-      if(rootNode.content === _lastSelectedElem.innerText) return rootNode;
-      if(rootNode.children) {
-        rootNode.children.forEach(n => {
-          //base case II.
-          if(n.content === _lastSelectedElem.innerText) {
-            console.log(n);
-            return n;
-          }
-          //recursive case
-          else {
-            traverseGraph(n);
-          }
-        });
-      }
+  function calcTargetDataPath(currentDataPath, event) {
+    switch (event.key) {        
+      case "ArrowLeft":
+        return currentDataPath.split('.').slice(0, -1).join('.');//remove last element 
+      case "ArrowRight":
+        return  currentDataPath+'.'+(Number(currentDataPath.split('.').pop()) + 1)
     }
+  }
 
-
-
+  function calcTargetElem(currentDataPath, event) {
+    //finds all elements with data-depth same as currently selected element
+    const elems = Array.from(document.getElementsByTagName('g')).filter(el => el.getAttribute('data-depth') === (currentDataPath.split('.').length - 1).toString());
+    //finds index of currently selected element
+    const index = elems.findIndex(el => el.getAttribute('data-path') === currentDataPath);
+    //returns data-path of element above or below
+    return event.key === "ArrowUp" ? elems[index + 1] : elems[index - 1];
+  }
 </script>
 <!------------------------------------------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------->
