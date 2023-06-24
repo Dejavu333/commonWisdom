@@ -2,40 +2,50 @@
 import { scale } from "svelte/transition";
 import { quintOut } from "svelte/easing";
 
-    //--------------------------------------------------
-    // props
-    //--------------------------------------------------
-    export let _Visible = false;
-    $: if (_Visible) {
-        window.addEventListener("keydown", handleEsc);
-    } else {
-        window.removeEventListener("keydown", handleEsc);
+//--------------------------------------------------
+// props
+//--------------------------------------------------
+export let _Visible = false;
+$: if (_Visible) {
+    window.addEventListener("keyup", handleEsc);
+    window.removeEventListener("keyup", handleEnter);
+} else {
+    window.removeEventListener("keyup", handleEsc);
+    window.addEventListener("keyup", handleEnter);
+}
+
+export let _SubTopic = "";
+let infoAboutSubTopic = "";
+$: readInfosByTopic(_SubTopic);
+
+//--------------------------------------------------
+// functions
+//--------------------------------------------------
+import infos from "../../public/subTopicInfos.json";  //todo ged infos from api by _SubTopic if the app gets bigger
+function readInfosByTopic(_SubTopic) {
+    if (!_SubTopic) return;
+    infos[_SubTopic] ? infoAboutSubTopic = infos[_SubTopic] : infoAboutSubTopic = "No infos about this subtopic yet";
+}
+
+function handleEsc(event) {
+    if (event.key === "Escape") {
+        closeInfoWindow();
     }
+}
 
-    export let _SubTopic = "";
-    let infoAboutSubTopic = "";
-    $: readInfosByTopic(_SubTopic);
-
-    //--------------------------------------------------
-    // functions
-    //--------------------------------------------------
-    import infos from "../../public/subTopicInfos.json";  //todo ged infos from api by _SubTopic if the app gets bigger
-    function readInfosByTopic(_SubTopic) {
-        if (!_SubTopic) return;
-        infos[_SubTopic] ? infoAboutSubTopic = infos[_SubTopic] : infoAboutSubTopic = "No infos about this subtopic yet";
+function handleEnter(event) {
+    if (event.key === "Enter" && _SubTopic !== "") {
+        openInfoWindow();
     }
+}
 
-    function handleEsc(event) {
-        if (event.key === "Escape") {
-            closeInfoWindow();
-        }
-    }
+function openInfoWindow() {
+    _Visible = true;
+}
 
-    function closeInfoWindow() {
-        _Visible = false;
-    }
-
-
+function closeInfoWindow() {
+    _Visible = false;
+}
 </script>
 <!------------------------------------------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------->
@@ -76,5 +86,4 @@ import { quintOut } from "svelte/easing";
         overflow:scroll;
         padding: 20px;
     }
-
 </style>
