@@ -14,13 +14,14 @@ let _isInfoWindowVisible = false;
 let _wisdomMapObject = null;
 
 import markdownsWithOptions from '../../public/markdownWithOptions.js';
-const markdownStr = markdownsWithOptions[_ChosenTopic].markdownStr; console.log(markdownStr); //todo get from api if app gets bigger//todo const markdownsWithOptions = getMarkdownWithOptions(_ChosenTopic);
-const initialExpandLevel = Number(markdownsWithOptions[_ChosenTopic].initialExpandLevel);
-const colorFreezeLevel = Number(markdownsWithOptions[_ChosenTopic].colorFreezeLevel);
+const markdownStr = markdownsWithOptions[_ChosenTopic]?.markdownStr; console.log(markdownStr); //todo get from api if app gets bigger//todo const markdownsWithOptions = getMarkdownWithOptions(_ChosenTopic);
+const initialExpandLevel = Number(markdownsWithOptions[_ChosenTopic]?.initialExpandLevel);
+const colorFreezeLevel = Number(markdownsWithOptions[_ChosenTopic]?.colorFreezeLevel);
 
 onMount(() => {    
   window.addEventListener("click", selectSubTopic);
   window.addEventListener("keyup", selectSubTopicWithArrows);
+  if (!markdownStr) {console.log("invalid topic"); return;}
   initWisdomMap(markdownStr, initialExpandLevel, colorFreezeLevel);
 });
 
