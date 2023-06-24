@@ -62,18 +62,15 @@
     _isInfoWindowVisible = false; _isInfoWindowVisible = true; //forces rerender
   }
 
-  // // function o(s) {
-  // //   console.log(s);
-  // // }
+  function o(s) {
+    console.log(s);
+  }
 
   function selectSubTopicWithArrows(e) {
     if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
       if (!_lastSelectedElem) return;
-      let currentDataPath =_lastSelectedElem.parentNode.parentNode.getAttribute("data-path");
-      let targetDataPath = calcTargetDataPath(currentDataPath, e);
-  // // o(targetDataPath);
-      const temp = Array.from(document.getElementsByTagName('g')).filter(el => el.getAttribute('data-path') === targetDataPath)[0];
-      const targetElem = Array.from(temp.children).filter(el => el.tagName === 'foreignObject')[0].children[0];
+      let currentDataPath = getCurrentDataPath();
+      let targetElem = calcTargetElemIfLeftOrRight(currentDataPath, e);
   // // o(targetElem);
       if (!targetElem) return;
       highlightTopic(targetElem);
@@ -81,30 +78,44 @@
     }
     else if(e.key === "ArrowDown" || e.key === "ArrowUp") {
       if (!_lastSelectedElem) return;
-      let currentDataPath =_lastSelectedElem.parentNode.parentNode.getAttribute("data-path");
-      let targetElem = Array.from(calcTargetElem(currentDataPath, e).children).filter(el => el.tagName === 'foreignObject')[0].children[0];
+      let currentDataPath = getCurrentDataPath();
+      let targetElem = calcTargetElemIfUpOrDown(currentDataPath, e);
+  // // o(targetElem);
       if (!targetElem) return;
       highlightTopic(targetElem);
       _selectedSubTopic = targetElem.innerText;
     }
   }
 
-  function calcTargetDataPath(currentDataPath, event) {
-    switch (event.key) {        
-      case "ArrowLeft":
-        return currentDataPath.split('.').slice(0, -1).join('.');//remove last element 
-      case "ArrowRight":
-        return  currentDataPath+'.'+(Number(currentDataPath.split('.').pop()) + 1)
-    }
+  function getCurrentDataPath() {
+    return _lastSelectedElem.parentNode.parentNode.getAttribute("data-path");
   }
 
-  function calcTargetElem(currentDataPath, event) {
+  function calcTargetElemIfLeftOrRight(currentDataPath, event) {
+    let targetDataPath;
+    switch (event.key) {        
+      case "ArrowLeft":
+        targetDataPath = currentDataPath.split('.').slice(0, -1).join('.');//remove last element 
+        break;
+      case "ArrowRight":
+        targetDataPath = currentDataPath+'.'+(Number(currentDataPath.split('.').pop()) + 1);
+        break;
+    }
+    o(targetDataPath);
+    const temp = Array.from(document.getElementsByTagName('g')).filter(el => el.getAttribute('data-path') === targetDataPath)[0];
+    o(temp);
+    const targetElem = Array.from(temp.children).filter(el => el.tagName === 'foreignObject')[0].children[0];
+    return targetElem
+  }
+
+  function calcTargetElemIfUpOrDown(currentDataPath, event) {
     //finds all elements with data-depth same as currently selected element
     const elems = Array.from(document.getElementsByTagName('g')).filter(el => el.getAttribute('data-depth') === (currentDataPath.split('.').length - 1).toString());
     //finds index of currently selected element
     const index = elems.findIndex(el => el.getAttribute('data-path') === currentDataPath);
     //returns data-path of element above or below
-    return event.key === "ArrowUp" ? elems[index + 1] : elems[index - 1];
+    const parent =  event.key === "ArrowUp" ? elems[index + 1] : elems[index - 1];
+    return Array.from(parent.children).filter(el => el.tagName === 'foreignObject')[0].children[0];
   }
 </script>
 <!------------------------------------------------------------------------------------------------------->
