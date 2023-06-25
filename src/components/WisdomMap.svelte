@@ -19,6 +19,8 @@ const initialExpandLevel = Number(markdownsWithOptions[_ChosenTopic]?.initialExp
 const colorFreezeLevel = Number(markdownsWithOptions[_ChosenTopic]?.colorFreezeLevel);
 
 onMount(() => {    
+  window.addEventListener("click", selectSubTopic);
+  window.addEventListener("keyup", selectSubTopicWithArrows);
   if (!markdownStr) {console.log("invalid topic"); return;}
   initWisdomMap(markdownStr, initialExpandLevel, colorFreezeLevel);
 });
@@ -42,24 +44,6 @@ function initWisdomMap(p_markdownStr, p_initialExpandLevel, p_colorFreezeLevel) 
   const options = markmap.deriveOptions( {colorFreezeLevel: p_colorFreezeLevel, initialExpandLevel: p_initialExpandLevel} );
   _wisdomMapObject = Markmap.create('#markmap', options, root);
   console.log(_wisdomMapObject);
-
-  window.addEventListener("click", selectSubTopic);
-  window.addEventListener("keyup", selectSubTopicWithArrows);
-  overwriteMouseEventsOnCircles();
-  document.querySelectorAll("circle").forEach(el => el.addEventListener("click", () => {
-    overwriteMouseEventsOnCircles();
-  }));
-}
-
-function overwriteMouseEventsOnCircles() {
-document.querySelectorAll("circle").forEach(el => {
-  el.addEventListener("mousedown", stopPropagation); 
-  el.addEventListener("dblclick", stopPropagation);
-  });
-}
-
-function stopPropagation(event) {
-  event.stopPropagation();
 }
 
 function selectSubTopic(event) {
