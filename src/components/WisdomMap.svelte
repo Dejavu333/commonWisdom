@@ -45,20 +45,29 @@ function initWisdomMap(p_markdownStr, p_initialExpandLevel, p_colorFreezeLevel) 
 
   window.addEventListener("click", selectSubTopic);
   window.addEventListener("keyup", selectSubTopicWithArrows);
-  overwriteMouseEventsOnCircles();
-  document.querySelectorAll("circle").forEach(el => el.addEventListener("click", () => {
-    overwriteMouseEventsOnCircles();
-  }));
+  window.addEventListener("click", (e) => {if(e.target.tagName=="circle"){addPreventUnwantedCircleEvents();} });
+  preventUnwantedCircleEvents();
+  addPreventUnwantedCircleEvents();
+
 }
 
-function overwriteMouseEventsOnCircles() {
-document.querySelectorAll("circle").forEach(el => {
-  el.addEventListener("mousedown", stopPropagation); 
-  el.addEventListener("dblclick", stopPropagation);
-  });
+function addAddPreventUnwantedCircleEventsEvents() {
+  document.querySelectorAll("circle").forEach(el => el.addEventListener("click", addPreventUnwantedCircleEvents));
+}
+function addPreventUnwantedCircleEvents() {
+  document.querySelectorAll("circle").forEach(el => el.addEventListener("click", preventUnwantedCircleEvents));
+}
+function preventUnwantedCircleEvents() {
+  setTimeout(() => {
+      document.querySelectorAll("circle").forEach(el => {
+        el.addEventListener("dblclick", stopPropagation);
+        el.addEventListener("mousedown", stopPropagation); 
+      });
+  }, 650); //because the expand animation takes 500ms
 }
 
 function stopPropagation(event) {
+  console.log("stopPropagation");
   event.stopPropagation();
 }
 
