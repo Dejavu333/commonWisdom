@@ -1,5 +1,5 @@
 <script>
-  import WisdomMap from './lib/WisdomMap.svelte';
+  import WisdomMap from './components/WisdomMap.svelte';
   
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
