@@ -36,7 +36,8 @@ onMount(() => {
 
 #repolink { 
   position: fixed;
-  bottom: 0;
+  bottom: 2%;
+  text-decoration: none;
 }
 
 /* #C {  color: rgb(31, 119, 180);}
@@ -60,10 +61,10 @@ onMount(() => {
 }
 @keyframes spin {
   from {
-    transform:rotate(0deg);
+    transform:rotate(-100deg);
   }
   to {
-    transform:rotate(360deg);
+    transform:rotate(280deg);
   }
 }
 
