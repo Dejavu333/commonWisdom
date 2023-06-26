@@ -4,6 +4,8 @@ import * as markmap from 'markmap-view';
 import { onMount } from 'svelte';
 import InfoWindow from './InfoWindow.svelte';
 
+//todo parse yaml
+
 //--------------------------------------------------
 // props
 //--------------------------------------------------
@@ -18,9 +20,15 @@ const markdownStr = markdownsWithOptions[_ChosenTopic]?.markdownStr; console.log
 const initialExpandLevel = Number(markdownsWithOptions[_ChosenTopic]?.initialExpandLevel);
 const colorFreezeLevel = Number(markdownsWithOptions[_ChosenTopic]?.colorFreezeLevel);
 
-onMount(() => {    
+onMount(() => {
   if (!markdownStr) {console.log("invalid topic"); return;}
-  initWisdomMap(markdownStr, initialExpandLevel, colorFreezeLevel);
+  setTimeout(() => {
+    initWisdomMap(markdownStr, initialExpandLevel, colorFreezeLevel);
+
+      _wisdomMapObject.fit();
+   
+
+  }, 2600);
 });
 
 //--------------------------------------------------
@@ -51,9 +59,6 @@ function initWisdomMap(p_markdownStr, p_initialExpandLevel, p_colorFreezeLevel) 
 
 }
 
-function addAddPreventUnwantedCircleEventsEvents() {
-  document.querySelectorAll("circle").forEach(el => el.addEventListener("click", addPreventUnwantedCircleEvents));
-}
 function addPreventUnwantedCircleEvents() {
   document.querySelectorAll("circle").forEach(el => el.addEventListener("click", preventUnwantedCircleEvents));
 }
@@ -65,7 +70,6 @@ function preventUnwantedCircleEvents() {
       });
   }, 650); //because the expand animation takes 500ms
 }
-
 function stopPropagation(event) {
   console.log("stopPropagation");
   event.stopPropagation();

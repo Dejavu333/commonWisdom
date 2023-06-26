@@ -1,6 +1,7 @@
 <script>
+  import LoadingScreen from './components/LoadingScreen.svelte';
   import WisdomMap from './components/WisdomMap.svelte';
-  
+
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
 
@@ -11,6 +12,7 @@
   </script>
   <!------------------------------------------------------------------------------------------------------->
   <!------------------------------------------------------------------------------------------------------->
+  <LoadingScreen/>
   <WisdomMap _ChosenTopic={TOPIC}/>
   <!------------------------------------------------------------------------------------------------------->
   <!------------------------------------------------------------------------------------------------------->
