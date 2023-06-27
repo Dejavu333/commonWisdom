@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "markmap-lib": "^0.14.4",
-    "markmap-view": "^0.14.4"
+    "markmap-view": "^0.14.4",
+    "yaml": "^2.3.1"
   }
 }

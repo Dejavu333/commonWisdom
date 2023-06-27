@@ -3,8 +3,9 @@ import { Transformer } from 'markmap-lib';
 import * as markmap from 'markmap-view';
 import { onMount } from 'svelte';
 import InfoWindow from './InfoWindow.svelte';
-
-//todo parse yaml
+import WEBSERVER_HOST from "../constants";
+import yaml, { parse } from "yaml";
+//todo MAKE avoiding circle events more performant
 
 //--------------------------------------------------
 // props
@@ -15,20 +16,18 @@ let _selectedSubTopic = "";
 let _isInfoWindowVisible = false;
 let _wisdomMapObject = null;
 
-import markdownsWithOptions from '../../public/markdownWithOptions.js';
-const markdownStr = markdownsWithOptions[_ChosenTopic]?.markdownStr; console.log(markdownStr); //todo get from api if app gets bigger//todo const markdownsWithOptions = getMarkdownWithOptions(_ChosenTopic);
-const initialExpandLevel = Number(markdownsWithOptions[_ChosenTopic]?.initialExpandLevel);
-const colorFreezeLevel = Number(markdownsWithOptions[_ChosenTopic]?.colorFreezeLevel);
+let _markdownStr = null;
+let _parsedSubTopicInfosObj = null;
+let _parsedOptionsObj = null;
+
 
 onMount(() => {
-  if (!markdownStr) {console.log("invalid topic"); return;}
-  setTimeout(() => {
-    initWisdomMap(markdownStr, initialExpandLevel, colorFreezeLevel);
-
-      _wisdomMapObject.fit();
-   
-
-  }, 2600);
+    getInfosByTopic(_ChosenTopic); //sets _markdownStr and _parsedOptionsObj and _parsedSubTopicInfosObj
+    
+    setTimeout(() => {
+    if (!_markdownStr) { console.log("invalid topic: "+ _ChosenTopic); return; }
+    initWisdomMap(_markdownStr,_parsedOptionsObj["initialExpandLevel"], _parsedOptionsObj["colorFreezeLevel"]);
+  }, 1000);
 });
 
 //--------------------------------------------------
@@ -56,7 +55,6 @@ function initWisdomMap(p_markdownStr, p_initialExpandLevel, p_colorFreezeLevel) 
   window.addEventListener("click", (e) => {if(e.target.tagName=="circle"){addPreventUnwantedCircleEvents();} });
   preventUnwantedCircleEvents();
   addPreventUnwantedCircleEvents();
-
 }
 
 function addPreventUnwantedCircleEvents() {
@@ -168,11 +166,33 @@ function getParentNodeDataPathFrom(currentDataPath) {
 
   return currentDataPath.split('.').slice(0, -1).join('.');
 }
+
+async function getInfosByTopic(p_topic) {
+    fetch(WEBSERVER_HOST + `/${p_topic}.yml`)
+    .then((response) => response.text())
+    .then((infosYML) => {
+      const parsedInfos = parseYML(infosYML);
+      _parsedSubTopicInfosObj = parsedInfos.parsedSubTopicInfosObj;
+      _parsedOptionsObj = parsedInfos.parsedOptionsObj;
+      _markdownStr = parsedInfos.markmapStr;
+      console.log(_markdownStr);
+    });
+}
+
+function parseYML(p_ymlStr) {
+  const parts = p_ymlStr.split("---");
+  const optionsYML = parts[0];
+  const markmapStr = parts[1];
+  const subTopicInfosYML = parts[2];
+  const parsedOptionsObj = yaml.parse(optionsYML);
+  const parsedSubTopicInfosObj = yaml.parse(subTopicInfosYML);
+  return {markmapStr, parsedOptionsObj, parsedSubTopicInfosObj};
+}
 </script>
 <!------------------------------------------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------->
 <svg id="markmap" style="width: 100%; height: 100vh" ></svg>
-<InfoWindow _SubTopic={_selectedSubTopic} _Visible={_isInfoWindowVisible}/>
+<InfoWindow _SubTopic={_selectedSubTopic} _Visible={_isInfoWindowVisible} _ParsedSubTopicInfosObj={_parsedSubTopicInfosObj}/>
 <!------------------------------------------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------->
 <style>

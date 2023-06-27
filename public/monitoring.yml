@@ -1,0 +1,72 @@
+colorFreezeLevel: 3
+initialExpandLevel: 1
+---
+- MONITORING
+  - collect data
+      - what data
+          - metrics
+              - counter
+              - gauge
+          - logs
+              - structured
+              - unstructured
+          - traces
+      - how
+          - push model
+              - agent
+              - sidecar
+              - service mesh
+              - exporter
+              - collector
+              - gateway
+          - pull model    
+              - polling
+              - long polling
+              - streaming
+  - store data
+      - metrics
+          - influxdb
+          - graphite
+          - open-falcon
+          - opentsdb
+          - kairosdb
+          - ganglia
+          - zabbix
+          - nagios
+          - collectd
+      - log
+          - elasticsearch
+          - splunk
+          - graylog
+          - logstash
+          - fluentd
+          - kafka
+      - trace
+          - jaeger
+          - zipkin
+          - skywalking
+  - use 
+      - alerting
+          - prometheus
+          - alertmanager
+          - icinga
+      - visualization
+          - grafana
+          - kibana
+          - tableau
+          - superset
+      - forecasting
+          - prometheus
+          - prophet
+          - statsmodels
+          - scikit-learn
+          - tensorflow`
+---
+
+MONITORING: |
+  MONITORING is 
+  the process of collecting, storing, and analyzing data about a software system. The goal of monitoring is to ensure that the system is operating as expected and to identify bottlenecks and other issues that can be addressed to improve performance.
+collect data: |
+  MONITORING is the process of collecting, storing, and analyzing data about a software system.
+  The goal of monitoring is to ensure that the system is operating as expected and to identify
+  bottlenecks and other issues that can be addressed to improve performance.  

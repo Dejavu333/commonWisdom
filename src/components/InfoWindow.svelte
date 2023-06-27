@@ -1,10 +1,10 @@
 <script>
 import { scale } from "svelte/transition";
 import { quintOut } from "svelte/easing";
-
 //--------------------------------------------------
 // props
 //--------------------------------------------------
+
 export let _Visible = false;
 $: if (_Visible) {
     window.addEventListener("keyup", handleEsc);
@@ -14,17 +14,17 @@ $: if (_Visible) {
     window.addEventListener("keyup", handleEnter);
 }
 
+export let _ParsedSubTopicInfosObj = null;
 export let _SubTopic = "";
 let infoAboutSubTopic = "";
-$: readInfosByTopic(_SubTopic);
+$: setInfoAboutSubTopic(_SubTopic);
 
 //--------------------------------------------------
 // functions
 //--------------------------------------------------
-import infos from "../../public/subTopicInfos.json";  //todo ged infos from api by _SubTopic if the app gets bigger
-function readInfosByTopic(_SubTopic) {
-    if (!_SubTopic) return;
-    infos[_SubTopic] ? infoAboutSubTopic = infos[_SubTopic] : infoAboutSubTopic = "No infos about this subtopic yet";
+function setInfoAboutSubTopic(_SubTopic) {
+    if (!_SubTopic) {console.log("no subtopic was provided"); return;}
+    _ParsedSubTopicInfosObj[_SubTopic] ? infoAboutSubTopic = _ParsedSubTopicInfosObj[_SubTopic] : infoAboutSubTopic = "No infos about this subtopic yet";
 }
 
 function handleEsc(event) {
