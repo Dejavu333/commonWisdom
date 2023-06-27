@@ -36,7 +36,7 @@ onMount(() => {
 
 #repolink { 
   position: fixed;
-  bottom: 2%;
+  bottom: 1%;
   text-decoration: none;
 }
 
