@@ -5,6 +5,7 @@ import { onMount } from 'svelte';
 import InfoWindow from './InfoWindow.svelte';
 import WEBSERVER_HOST from "../constants";
 import yaml, { parse } from "yaml";
+    import ErrorPage from './ErrorPage.svelte';
 //todo MAKE avoiding circle events more performant
 
 //--------------------------------------------------
@@ -15,6 +16,7 @@ let _selectedElement = null;
 let _selectedSubTopic = "";
 let _isInfoWindowVisible = false;
 let _wisdomMapObject = null;
+let _error = null;
 
 let _markdownStr = null;
 let _parsedSubTopicInfosObj = null;
@@ -22,10 +24,11 @@ let _parsedOptionsObj = null;
 
 
 onMount(() => {
+    if (!_ChosenTopic) { _error="NO_TOPIC"; return; }
     getInfosByTopic(_ChosenTopic); //sets _markdownStr and _parsedOptionsObj and _parsedSubTopicInfosObj
     
     setTimeout(() => {
-    if (!_markdownStr) { console.log("invalid topic: "+ _ChosenTopic); return; }
+    if (!_markdownStr) { _error="NON_EXISTING_TOPIC"; return; }
     initWisdomMap(_markdownStr,_parsedOptionsObj["initialExpandLevel"], _parsedOptionsObj["colorFreezeLevel"]);
   }, 1000);
 });
@@ -191,6 +194,7 @@ function parseYML(p_ymlStr) {
 </script>
 <!------------------------------------------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------->
+<ErrorPage _Error={_error}/>
 <svg id="markmap" style="width: 100%; height: 100vh" ></svg>
 <InfoWindow _SubTopic={_selectedSubTopic} _Visible={_isInfoWindowVisible} _ParsedSubTopicInfosObj={_parsedSubTopicInfosObj}/>
 <!------------------------------------------------------------------------------------------------------->
