@@ -60,6 +60,7 @@ function initWisdomMap(p_markdownStr, p_initialExpandLevel, p_colorFreezeLevel) 
   addPreventUnwantedCircleEvents();
 }
 
+//todo remove these if lib is fixed (my PR is merged but the npm package is not updated yet)
 function addPreventUnwantedCircleEvents() {
   document.querySelectorAll("circle").forEach(el => el.addEventListener("click", preventUnwantedCircleEvents));
 }
@@ -166,7 +167,6 @@ function getCurrentDataPath() {
 
 function getParentNodeDataPathFrom(currentDataPath) {
   if (!currentDataPath) return null;
-
   return currentDataPath.split('.').slice(0, -1).join('.');
 }
 
@@ -178,7 +178,7 @@ async function getInfosByTopic(p_topic) {
       _parsedSubTopicInfosObj = parsedInfos.parsedSubTopicInfosObj;
       _parsedOptionsObj = parsedInfos.parsedOptionsObj;
       _markdownStr = parsedInfos.markmapStr;
-      console.log(_markdownStr);
+      console.log("fetched:\n"+_markdownStr);
     });
 }
 
@@ -195,7 +195,7 @@ function parseYML(p_ymlStr) {
 <!------------------------------------------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------->
 <ErrorPage _Error={_error}/>
-<svg id="markmap" style="width: 100%; height: 100vh" ></svg>
+<svg id="markmap" style="width: 100%; height: 100vh"></svg>
 <InfoWindow _SubTopic={_selectedSubTopic} _Visible={_isInfoWindowVisible} _ParsedSubTopicInfosObj={_parsedSubTopicInfosObj}/>
 <!------------------------------------------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------->
