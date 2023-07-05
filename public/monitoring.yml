@@ -16,36 +16,28 @@ initialExpandLevel: 1
               - agent
               - sidecar
               - service mesh
-              - exporter
               - collector
               - gateway
           - pull model    
               - polling
-              - long polling
               - streaming
+              - scraping
+              - health check
+              
   - store data
-      - metrics
-          - influxdb
-          - graphite
-          - open-falcon
-          - opentsdb
-          - kairosdb
-          - ganglia
-          - zabbix
-          - nagios
-          - collectd
-      - log
-          - elasticsearch
-          - splunk
-          - graylog
-          - logstash
-          - fluentd
-          - kafka
-      - trace
-          - jaeger
-          - zipkin
-          - skywalking
-  - use 
+    - influxdb
+    - graphite
+    - nagios
+    - collectd
+    - elasticsearch
+    - splunk
+    - graylog
+    - logstash
+    - fluentd
+    - jaeger
+    - zipkin
+    - skywalking
+  - use data
       - alerting
           - prometheus
           - alertmanager
@@ -56,17 +48,74 @@ initialExpandLevel: 1
           - tableau
           - superset
       - forecasting
-          - prometheus
           - prophet
           - statsmodels
           - scikit-learn
-          - tensorflow`
+          - tensorflow
 ---
 
 MONITORING: |
-  MONITORING is 
-  the process of collecting, storing, and analyzing data about a software system. The goal of monitoring is to ensure that the system is operating as expected and to identify bottlenecks and other issues that can be addressed to improve performance.
+    MONITORING is 
+    the process of collecting, storing, and analyzing data about a software system.
+    The goal of monitoring is to ensure that the system is operating as expected.
 collect data: |
-  MONITORING is the process of collecting, storing, and analyzing data about a software system.
-  The goal of monitoring is to ensure that the system is operating as expected and to identify
-  bottlenecks and other issues that can be addressed to improve performance.  
+    The process of 
+    gathering data from a software system.
+how: |
+    The data can be collected in two ways, via the push model or the pull model.
+push model: |
+    In the push model, 
+    the software system sends data to a monitoring system.
+pull model: |
+    In the pull model, 
+    the monitoring system requests data from the software system.
+what data: |
+    The data can be metrics, logs, or traces.
+metrics: |
+    Metrics are 
+    numerical values that represent the state of a software system.
+    Metrics can be counters or gauges.
+logs: |
+    Logs are 
+    textual messages that represent the state of a software system at a given time.
+    Logs can be structured or unstructured.
+traces: |
+    Traces are 
+    the sequence of correlated events.
+    They are used to debug distributed systems. Traces are like footprints, we can follow them to find the root cause of a problem.
+gauge: |
+    A gauge is 
+    a metric that represents a single numerical value that can arbitrarily go up and down.
+    Speedometer is a good example of a gauge.
+counter: |
+    A counter is 
+    a metric that represents a single numerical value that only ever goes up. It's reset to zero when the process restarts.
+    Pedometer is a good example of a counter.
+store data: |
+    The process of 
+    saving data to a storage system.
+use data: |
+    The data can be used for alerting, visualization, or forecasting.
+alerting: |
+    Alerting is 
+    the process of sending alerts when a software system is not operating as expected.
+icinga: |
+    Icinga is an <a href='https://github.com/Icinga/icinga2' target='_blank'>open-source</a> monitoring system.
+    Icinga monitors any and everything, that you want to have monitored in your  existing infrastructure,
+    and it does so, by running plugins. Those plugins can be anything, but the most common ones would be  
+    a disk check, for example, to see how full your disk is, or a ping check to reach any servers you have.
+    ou can get those plugins on <a href='https://exchange.icinga.com/' target='_blank'>Icinga exchange</a> which is a
+    platform where other users can upload their own custom check plugins.
+    <br><br>
+    When it comes to notifications you have a lot  of different freedoms and things you can decide:  
+    for example WHAT you want to be notified on.  
+    WHEN you want to be notified and also when you don't want to receive notifications.  
+    HOW you receive those notifications, be it via mail, telegram, SMS or if you want to receive a  
+    call from the system.
+    <br><br>
+    Data is collected by the Icinga agent, which is installed on the host that you want to monitor.
+    The agent then sends the data to the Icinga server, which is the central component of Icinga.
+    The server then processes the data and stores it in a database.
+    The server also sends alerts to the user when a problem is detected.
+    The server can also be configured to send alerts to other systems like Slack or PagerDuty.
+    Icinga 2 is written in C++ and can be built on Linux/Unix and Windows.
