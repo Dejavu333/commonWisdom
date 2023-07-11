@@ -23,11 +23,22 @@ $: setInfoAboutSubTopic(_SubTopic);
 // functions
 //--------------------------------------------------
 function setInfoAboutSubTopic(_SubTopic) {
-    if (!_SubTopic) {console.log("no subtopic was provided"); return;}
-    _ParsedSubTopicInfosObj[_SubTopic] ? infoAboutSubTopic = _ParsedSubTopicInfosObj[_SubTopic] : infoAboutSubTopic = "No infos about this subtopic yet";
+    //sad path
+    if (!_SubTopic) {
+        console.log("no subtopic was provided"); 
+        return;
+    }
+    if (_ParsedSubTopicInfosObj===null || _ParsedSubTopicInfosObj[_SubTopic]===undefined) {
+        infoAboutSubTopic = "No infos about this subtopic yet...";
+        return;
+    }
+    //happy path
+    infoAboutSubTopic = _ParsedSubTopicInfosObj[_SubTopic];
 
     setTimeout(() => {
-        document.querySelectorAll("pre").forEach((block) => {
+        let preDivs = document.querySelectorAll("pre");
+        if (!preDivs) {console.log("no pre divs found"); return;}
+        preDivs.forEach((block) => {
             // block.classList.remove("active-code");
             block.classList.add("active-code");
         });
@@ -74,6 +85,7 @@ function closeInfoWindow() {
         padding: 5px;
         border-radius: 50%;
         border: 2px solid var(--activeColor);
+        background-color: whitesmoke;
     }
 
     button:hover {
