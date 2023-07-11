@@ -2,6 +2,10 @@
   --lightColor: rgb(237, 237, 237);
   --fontColor: rgba(0, 0, 0, 0.8);
   --activeColor: rgba(56, 199, 192, 0.5);
+  --redColor: rgb(214, 39, 40);
+  --orangeColor: rgb(255, 127, 14);
+  --greenColor: rgb(44, 160, 44);
+  --blueColor: rgb(31, 119, 180);
 }
 
 * {
@@ -10,9 +14,9 @@
   user-select: none;
   color: var(--fontColor);
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  color: var(--fontColor);
   overflow: hidden;
 }
+
 
 #mindmap {
   display: block;
@@ -44,4 +48,35 @@ foreignObject > div {
 #infosContainer>img {
   width: 100%;
   height: auto;
+}
+
+
+pre { 
+  opacity:  0;
+  color: var(--fontColor);
+  background-color: whitesmoke !important;
+}
+.active-code { 
+  opacity: 1; 
+  transition: opacity 1.5s ease-in-out;
+}
+
+.operator {
+  background-color: transparent !important;
+} 
+
+.function {
+  color: var(--redColor) !important;
+}
+.keyword {
+  color:  var(--blueColor) !important;
+}
+.comment {
+  color: var(--greenColor) !important;
+}
+.string {
+  color: var(--orangeColor) !important;
+}
+.punctuation {
+  color: var(--fontColor) !important;
 }

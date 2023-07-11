@@ -25,6 +25,14 @@ $: setInfoAboutSubTopic(_SubTopic);
 function setInfoAboutSubTopic(_SubTopic) {
     if (!_SubTopic) {console.log("no subtopic was provided"); return;}
     _ParsedSubTopicInfosObj[_SubTopic] ? infoAboutSubTopic = _ParsedSubTopicInfosObj[_SubTopic] : infoAboutSubTopic = "No infos about this subtopic yet";
+
+    setTimeout(() => {
+        document.querySelectorAll("pre").forEach((block) => {
+            // block.classList.remove("active-code");
+            block.classList.add("active-code");
+        });
+        Prism.highlightAll();
+    }, 30);
 }
 
 function handleEsc(event) {
