@@ -1,11 +1,13 @@
 :root {
   --lightColor: rgb(237, 237, 237);
   --fontColor: rgba(0, 0, 0, 0.8);
+  --fontColorLight: rgba(0, 0, 0, 0.3);
   --activeColor: rgba(56, 199, 192, 0.5);
   --redColor: rgb(214, 39, 40);
   --orangeColor: rgb(255, 127, 14);
   --greenColor: rgb(44, 160, 44);
   --blueColor: rgb(31, 119, 180);
+  --greyColor: hsl(0, 0%, 40%);
 }
 
 * {
@@ -14,7 +16,12 @@
   user-select: none;
   color: var(--fontColor);
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  text-shadow: none;
   overflow: hidden;
+}
+
+body {
+  background-color: whitesmoke;
 }
 
 
@@ -56,15 +63,19 @@ pre {
   color: var(--fontColor);
   background-color: whitesmoke !important;
 }
+code {
+  color: var(--fontColor) !important;
+  text-shadow: none !important;
+}
 .active-code { 
   opacity: 1; 
   transition: opacity 1.5s ease-in-out;
 }
 
 .operator {
+  color: var(--greyColor) !important;
   background-color: transparent !important;
 } 
-
 .function {
   color: var(--redColor) !important;
 }
@@ -78,5 +89,12 @@ pre {
   color: var(--orangeColor) !important;
 }
 .punctuation {
-  color: var(--fontColor) !important;
+  color: var(--greyColor) !important;
+}
+.class-name {
+  color: var(--activeColor) !important;
+}
+mark {
+  background-color: transparent !important;
+  color: var(--fontColorLight) !important;
 }

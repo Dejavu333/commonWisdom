@@ -78,9 +78,9 @@ function stopPropagation(event) {
 }
 
 function selectSubTopic(event) {
-  const element = event.target;
-  if (!element.hasAttribute("xmlns")) return;
-
+  let element = event.target;
+  if (!element.hasAttribute("xmlns") && element.tagName!="MARK") return;
+  if (element.tagName=="MARK") element = element.parentElement;
   highlightTopic(element);
   _selectedSubTopic = element.innerText;
   _isInfoWindowVisible = false; _isInfoWindowVisible = true; // force rerender
@@ -93,7 +93,6 @@ function selectSubTopicWithArrows(event) {
     const currentDataPath = getCurrentDataPath();
     const targetElement = calcTargetElementIfLeftOrRight(currentDataPath, event);
     if (!targetElement) return;
-
     highlightTopic(targetElement);
     _selectedSubTopic = targetElement.innerText;
   } else if (key === "ArrowDown" || key === "ArrowUp") {
@@ -101,7 +100,6 @@ function selectSubTopicWithArrows(event) {
     const currentDataPath = getCurrentDataPath();
     const targetElement = calcTargetElementIfUpOrDown(currentDataPath, event);
     if (!targetElement) return;
-
     highlightTopic(targetElement);
     _selectedSubTopic = targetElement.innerText;
   }
@@ -162,7 +160,12 @@ function highlightTopic(element) {
 }
 
 function getCurrentDataPath() {
-  return _selectedElement.parentNode.parentNode.getAttribute("data-path");
+  switch (_selectedElement.tagName) {
+    case "MARK":
+      return _selectedElement.parentNode.parentNode.parentNode.getAttribute("data-path");
+    case "DIV":
+      return _selectedElement.parentNode.parentNode.getAttribute("data-path");
+  }
 }
 
 function getParentNodeDataPathFrom(currentDataPath) {
