@@ -28,7 +28,7 @@ onMount(() => {
     position: fixed;
     width: 100%;
     height: 100vh;
-    background: #fff;
+    background: whitesmoke;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,8 +41,9 @@ onMount(() => {
   text-decoration: none;
 }
 
-/* #C {  color: rgb(31, 119, 180);}
-#W {  color: rgb(31, 119, 180);} */
+#C,#W { 
+  font-family: 'Comfortaa', cursive; 
+}
 
 .loading {
   overflow: visible;
@@ -50,7 +51,7 @@ onMount(() => {
   display:flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
+  background: whitesmoke;
   width: 100px;
   height: 100px;
   border-radius: 100%;

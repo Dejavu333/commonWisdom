@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
 
 :root {
-  --lightColor: rgb(237, 237, 237);
+  --lightColor: hsl(0, 0%, 91%);
   --fontColor: rgba(0, 0, 0, 0.8);
   --fontColorLight: rgba(0, 0, 0, 0.3);
   --activeColor: rgba(56, 199, 192, 0.5);
