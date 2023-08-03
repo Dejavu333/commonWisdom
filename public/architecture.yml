@@ -26,20 +26,60 @@ colorFreezeLevel: 2
   - requirements
     - functionality
     - cost
+      - development
+      - maintenance
+      - operation
     - performance
+      - load balancing
+      - caching
+      - asynchronous processing
+      - lazy loading
+      - eager loading
     - maintainability
+      - devops
     - scalability
+      - xyz axis scaling
+      - auto scaling
+      - service discovery
     - testability
+      - unit test
+      - integration test
+      - end to end test
+          - consumer driven contract test
+          - chaos test
+          - penetration test
+          - fuzz test
+          - soak test
+          - stress test
+          - spike test
+          - smoke test
+          - regression test
+        - static code analysis
+
     - security
+      - authentication
+      - authorization
+      - validation
     - observability
     - resiliency
+      - auto healing
+      - circuit breaker
+      - bulkhead
+      - retry
+      - timeout
     - portability
-  - anti-patterns
+      - containerization
+      - VM
+      - serverless
+  - anti patterns
     - ==distributed monolith==
     - ==distributed transaction==
     - ==no clear boundaries==
     - ==no clear ownership of data==
     - ==chatty communication==
+    - ==shared database==
+    - ==shared code==
+    - ==no versioning==
 ---
 atomic: all or none, if an operation consists of multiple steps, either all steps are performed or none are
 eventual: if no new updates are made to the given data item, eventually all accesses to that item will return the last updated value
