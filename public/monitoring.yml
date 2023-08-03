@@ -43,7 +43,7 @@ initialExpandLevel: 1
           - alertmanager
           - icinga
       - visualization
-          - grafana
+          - ==grafana==
           - kibana
           - tableau
           - superset

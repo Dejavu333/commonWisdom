@@ -1,0 +1,54 @@
+initialExpandLevel: 1
+colorFreezeLevel: 2
+---
+- DEVOPS
+    - dev
+        - 1 plan
+        - 2 code
+            - CI
+        - 3 build
+    - qa
+        - 4 test
+    - ops
+        - 5 deploy
+            - CD
+        - 6 monitor
+---
+DEVOPS: |
+    DevOps is a software development approach that combines development (Dev) and operations (Ops) teams, processes,
+    and tools to enhance collaboration, communication, and efficiency throughout the software development lifecycle.
+    It aims to bridge the gap between development and operations by promoting automation, continuous integration and
+    delivery, and a culture of shared responsibility.
+    The DevOps lifecycle refers to the sequence of activities and stages involved in the development, deployment,
+    and maintenance of software applications in a DevOps environment. It typically consists of the following stages:
+    1 plan
+    2 code
+    3 build
+    4 test
+    5 deploy
+    6 monitor
+1 plan: |
+    In this initial stage, teams define project goals, identify requirements, and plan the development process.
+    This includes prioritizing features, estimating timelines, and allocating resources.
+2 code: |
+    The development stage involves writing code, designing software components, and building
+    the application. Developers collaborate using version control systems and work on feature
+    branches to implement new functionality.
+3 build: |
+    During this stage, the application is compiled, and dependencies are resolved. The code is transformed into
+    executable artifacts, such as binaries or containers, ready for deployment.
+4 test: |
+    The testing stage involves running automated tests to ensure that the application meets the specified requirements.
+    This includes unit testing, integration testing, and end-to-end testing.
+5 deploy: |
+    Once the application passes testing, it is deployed to the target environment, which can be a production server,
+    a cloud platform, or a container orchestration system.
+6 monitor: |
+    Continuous monitoring of the application and infrastructure helps identify performance bottlenecks, security vulnerabilities,
+    or other operational concerns. This information is used to optimize the system, make informed decisions, and ensure the
+    application meets the expectations.
+
+
+
+
+

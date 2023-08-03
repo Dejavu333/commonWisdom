@@ -1,0 +1,41 @@
+colorFreezeLevel: 3
+initialExpandLevel: 1
+---
+- network layers
+  - application layer
+    - msg
+  - transport layer(end2end)
+    - segmentation
+    - control flow(end2end)
+  - network layer(network2network)
+    - packing 
+    wrapping only or 
+    fragmenting and wrapping
+    - routing
+    - NAT
+  - data link layer(point2point)
+    - framing
+    - control flow(point2point)
+    - multiplex
+    - ARP
+    - control error
+  - physical layer
+    - signal
+    - noise
+    - bandwidth
+---
+network layers: |
+  
+msg: 
+  we push data into messages (format, encryption, compression)
+segment:
+  messages are broken into segments, 
+  src port num destination port num added
+packet:
+  segments are wrapped into packets
+  src IP adr and destination IP adr added
+frame: 
+  packets are further divided into frames based on frame size of network interface card
+  source MAC adr and destination MAC adr added
+ARP:
+  The receivers MAC address is obtained by placing address resolution protocol onto the IP who has that IP address 

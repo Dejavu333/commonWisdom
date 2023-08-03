@@ -1,0 +1,42 @@
+initialExpandLevel: 1
+colorFreezeLevel: 2
+---
+- design
+  - patterns
+    - factory method
+    - abstract factory
+    - builder
+    - prototype
+    - singleton
+    - observer
+    - strategy
+    - state
+    - template method
+    - command
+    - adapter
+    - facade
+    - proxy
+    - decorator
+    - bridge
+    - composite
+    - flyweight
+    - iterator
+    - mediator
+    - memento
+    - visitor
+    - chain of responsibility
+    - interpreter
+  - practices
+      - SOLID
+        - single responsibility
+        - open closed
+        - liskov substitution
+        - interface segregation
+        - dependency inversion 
+      - DRY
+      - KISS
+      - YAGNI
+      - POLP
+      - sad path, happy path
+      - fail safe, fail fast
+---

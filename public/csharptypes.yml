@@ -1,0 +1,96 @@
+initialExpandLevel: 1
+colorFreezeLevel: 2
+---
+- C# types
+    - value types
+        - user defined
+            - struct
+            - enum
+        - built-in
+            - bool
+            - byte
+            - char
+            - decimal
+            - double
+            - float
+            - int
+            - long
+            - sbyte
+            - short
+            - uint
+            - ulong
+            - ushort
+    - reference types
+        - user defined
+            - class
+            - interface
+            - delegate
+        - built-in
+            - object
+            - string
+            - dynamic
+    - check for null
+        - double equals operator
+        - is and is not operators
+        - null conditional operator
+        - null coalescing operator
+        - check for empty string
+---
+value types: |
+    Value types 
+    <br>- are copied when they are assigned to a variable or passed as a parameter.
+    <br>- stored on the stack.
+    <br>- are destroyed when they go out of scope.
+    <br>- are allocated memory automatically.
+    <br>- are derived from the System.ValueType class.
+    <br>- values be compared using the == operator, or their memory location can be compared using the ReferenceEquals method.
+reference types: |
+    Reference is a constant pointer to a memory location, it cannot be changed.
+    Reference types 
+    <br>- do not get copied when they are assigned to a variable or passed as a parameter, instead, a reference to the memory location is copied.
+    <br>- are stored on the heap.
+    <br>- are destroyed by the garbage collector.
+    <br>- allocate memory using the new keyword.
+    <br>- are derived from the System.Object class.
+    <br>- contents can be compared using the Equals method, or their memory location can be compared using the ReferenceEquals method.
+double equals operator: |
+    The double equals operator == compares the values of two operands. If the values are equal, the result is true. If the values are not equal, the result is false.
+        <pre><code class="language-csharp">
+        dynamic dynamicValue = null;
+        if (dynamicValue == null)
+        {
+            Console.WriteLine("dynamicValue is null");
+        }
+        else
+        {
+            Console.WriteLine("dynamicValue is not null");
+        }
+        </code></pre>
+is and is not operators: |
+    The is and is not operators are used to check whether an object is compatible with a given type. The is operator returns true if the object is compatible with the given type, otherwise it returns false.
+        <pre><code class="language-csharp">
+        dynamic dynamicValue = null;
+        if (dynamicValue is null)
+        {
+            Console.WriteLine("dynamicValue is null");
+        }
+        else if (dynamicValue is not null)
+        {
+            Console.WriteLine("dynamicValue is not null");
+        }
+        </code></pre>
+        <script> console.log('kabbeafastom'); </script>
+null coalescing operator: |
+    The null coalescing operator ?? returns the value of its left-hand operand if it isn't null; otherwise, it evaluates the right-hand operand and returns its result. The ?? operator doesn't evaluate its right-hand operand if the left-hand operand evaluates to non-null.
+        <pre><code class="language-csharp">
+        int? nullableInt = null;
+        int nonNullableInt = nullableInt ?? 10;
+        Console.WriteLine(nonNullableInt); // Output: 10
+        </code></pre>
+null conditional operator: |
+    The null conditional operator ?. is used to access members of an object if the object is not null. If the object is null, the result is null.
+        <pre><code class="language-csharp">
+        string? nullableString = null;
+        int? length = nullableString?.Length;
+        Console.WriteLine(length); // Output: null
+        </code></pre>

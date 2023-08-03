@@ -1,0 +1,45 @@
+initialExpandLevel: 1
+colorFreezeLevel: 2
+---
+- architecture
+  - data desintegrators
+  - service desintegrators
+  - interprocess communication
+    - sync
+      - ==direct call==
+      - ==REST==
+      - ==gRPC==
+      - ==GraphQL==
+      - ==SOAP==
+    - async
+      - ==queue==
+      - ==file==
+  - deployment
+    - monolith
+    - distributed
+  - coordination
+    - orchestrated
+    - choreographed
+  - consistency
+    - eventual
+    - atomic
+  - requirements
+    - functionality
+    - cost
+    - performance
+    - maintainability
+    - scalability
+    - testability
+    - security
+    - observability
+    - resiliency
+    - portability
+  - anti-patterns
+    - ==distributed monolith==
+    - ==distributed transaction==
+    - ==no clear boundaries==
+    - ==no clear ownership of data==
+
+---
+atomic: all or none, if an operation consists of multiple steps, either all steps are performed or none are
+eventual: if no new updates are made to the given data item, eventually all accesses to that item will return the last updated value

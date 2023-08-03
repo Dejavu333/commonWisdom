@@ -1,0 +1,62 @@
+colorFreezeLevel: 3
+initialExpandLevel: 1
+---
+- programming
+  - data structures
+    - heap
+    - linked list
+    - stack
+    - queue
+    - tree
+    - graph
+  - algorithms
+
+    - fundamental algorithms
+      - iteration 
+      - recursion
+      - vector -> scalar
+        - counting
+        - decision
+        - summation
+        - selection
+        - min/max selection
+        - searching
+            - ==linear search==
+            - ==binary search==
+      - vector -> vector
+        - sorting
+            - ==bubble sort==
+            - ==insertion sort==
+            - ==selection sort==
+            - ==merge sort==
+            - ==quick sort==
+        - filtering
+        - partitioning
+        - merge
+        - union
+        - intersection
+
+    - advanced algorithms
+      - greedy
+      - divide and conquer
+        - dynamic programming
+      - backtracking
+
+    - artificial intelligence algorithms
+      - biology inspired
+        - swarm 
+        - genetic
+      - machine learning
+        - supervised
+          - classificaiton
+          - regression
+        - unsupervised
+          - clustering
+          - association
+        - reinforcement
+      - deep learning
+          - ==perceptron==
+          - ==neural networks==
+          - ==convolutional neural networks==
+          - ==recurrent neural networks==
+---
