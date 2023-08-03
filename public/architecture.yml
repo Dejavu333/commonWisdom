@@ -39,7 +39,7 @@ colorFreezeLevel: 2
     - ==distributed transaction==
     - ==no clear boundaries==
     - ==no clear ownership of data==
-
+    - ==chatty communication==
 ---
 atomic: all or none, if an operation consists of multiple steps, either all steps are performed or none are
 eventual: if no new updates are made to the given data item, eventually all accesses to that item will return the last updated value
