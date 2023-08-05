@@ -39,4 +39,17 @@ colorFreezeLevel: 2
       - POLP
       - sad path, happy path
       - fail safe, fail fast
+      - DDD
+        - model
+          - domain
+            - aggregates
+            - value objects
+            - entities
+          - repository
+        - service
+        - controller
+        - view
+      - DAO pattern
+      - DTO pattern
+      - TDD
 ---

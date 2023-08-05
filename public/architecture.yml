@@ -55,7 +55,7 @@ colorFreezeLevel: 2
           - smoke test
           - regression test
         - static code analysis
-
+        - fitness functions
     - security
       - authentication
       - authorization
