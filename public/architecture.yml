@@ -2,6 +2,9 @@ initialExpandLevel: 1
 colorFreezeLevel: 2
 ---
 - architecture
+  - repository
+    - monorepo
+    - multirepo
   - data desintegrators
   - service desintegrators
   - interprocess communication
@@ -14,12 +17,17 @@ colorFreezeLevel: 2
     - async
       - ==queue==
       - ==file==
+  - data access
+    - through shared db
+    - through owner
+    - through replica
   - deployment
     - monolith
     - distributed
   - coordination
     - orchestrated
     - choreographed
+    - free4all
   - consistency
     - eventual
     - atomic
@@ -76,9 +84,9 @@ colorFreezeLevel: 2
     - ==distributed transaction==
     - ==no clear boundaries==
     - ==no clear ownership of data==
-    - ==chatty communication==
     - ==shared database==
     - ==shared code==
+    - ==chatty communication==
     - ==no versioning==
 ---
 atomic: all or none, if an operation consists of multiple steps, either all steps are performed or none are
