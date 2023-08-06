@@ -9,8 +9,6 @@ initialExpandLevel: 1
     - control flow(end2end)
   - network layer(network2network)
     - packing 
-    wrapping only or 
-    fragmenting and wrapping
     - routing
     - NAT
   - data link layer(point2point)
@@ -29,13 +27,17 @@ network layers: |
 msg: 
   we push data into messages (format, encryption, compression)
 segment:
-  messages are broken into segments, 
+  messages are broken and wrapped into segments, 
   src port num destination port num added
 packet:
-  segments are wrapped into packets
+  segments are further divided and wrapped into packets
+  The Network layer, primarily through the Internet Protocol (IP), tries to ensure that packets are small enough to be transmitted over the network path without needing further fragmentation. It does this by considering the Maximum Transmission Unit (MTU) of the path between the sender and the receiver. The MTU is the largest size that a packet can be in order to be transmitted over a particular network link or path.
+  By ideally sending packets that are small enough to travel the entire path without being further fragmented, the Network layer can help to prevent the need for fragmentation at the Data Link layer. However, this doesn't always happen perfectly, especially in complex or changing network conditions.
+  On the other hand, the Data Link layer is more concerned with the specifics of the immediate network link. If a packet received from the Network layer is too large for the physical medium (for example, the Ethernet cable or Wi-Fi), the Data Link layer will fragment it into smaller frames that can be transmitted over that specific medium.
+  So, in the ideal scenario, if the Network layer is able to accurately determine the smallest MTU along the path and size its packets accordingly, the Data Link layer wouldn't need to perform additional fragmentation. But if the Network layer sends a packet that's too large for the immediate network link, the Data Link layer will have to fragment it further.
   src IP adr and destination IP adr added
 frame: 
-  packets are further divided into frames based on frame size of network interface card
+  packets are (further divided if needed and) wrapped into frames based on frame size of network interface card
   source MAC adr and destination MAC adr added
 ARP:
   The receivers MAC address is obtained by placing address resolution protocol onto the IP who has that IP address 
