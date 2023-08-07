@@ -2,6 +2,8 @@ initialExpandLevel: 1
 colorFreezeLevel: 2
 ---
 - architecture
+  - lifecycle
+    - **devops**
   - repository
     - monorepo
     - multirepo
@@ -52,26 +54,28 @@ colorFreezeLevel: 2
       - auto scaling
       - service discovery
     - testability
-      - unit test
-      - integration test
-      - end to end test
-          - consumer driven contract test
-            - ==schemathesis==
-          - chaos test
-          - penetration test
-          - fuzz test
-          - soak test
-          - stress test
-          - spike test
-          - smoke test
-          - regression test
-        - static code analysis
-        - fitness functions
+      - **testing**
+        - unit test
+        - integration test
+        - end to end test
+            - consumer driven contract test
+              - ==schemathesis==
+            - chaos test
+            - penetration test
+            - fuzz test
+            - soak test
+            - stress test
+            - spike test
+            - smoke test
+            - regression test
+          - static code analysis
+          - fitness functions
     - security
       - authentication
       - authorization
       - validation
     - observability
+      - **monitoring**
     - resiliency
       - auto healing
       - circuit breaker
