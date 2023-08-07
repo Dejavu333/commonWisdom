@@ -44,7 +44,9 @@ colorFreezeLevel: 2
       - lazy loading
       - eager loading
     - maintainability
-      - devops
+      - documentation
+        - ==OpenAPI==
+          - ==swagger==
     - scalability
       - xyz axis scaling
       - auto scaling
@@ -54,6 +56,7 @@ colorFreezeLevel: 2
       - integration test
       - end to end test
           - consumer driven contract test
+            - ==schemathesis==
           - chaos test
           - penetration test
           - fuzz test
