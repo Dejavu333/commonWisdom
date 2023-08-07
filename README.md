@@ -15,6 +15,6 @@
     the source of the data is a yml file
     he yml file's name must be the same as the topic in order to be loaded like ?topic=ymlFileName
     the yml file defines the structure of the wisdom tree
-    \*subtopic\*     -> italics
-    \*\*subtopic\*\* -> bold
-    \==subtopic\== -> unimportant
+    *subtopic*     -> italics
+    **subtopic**   -> bold
+    ==subtopic==   -> unimportant
