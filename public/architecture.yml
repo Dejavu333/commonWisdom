@@ -68,7 +68,9 @@ colorFreezeLevel: 2
               - ==masscan==
               - ==nmap==
               - ==metasploit==
+              - ==ZAP==
             - fuzz test
+              - ==fuff==
             - soak test
             - stress test
             - spike test
@@ -84,6 +86,8 @@ colorFreezeLevel: 2
         - malware
         - reverse engineering
         - social engineering
+        - injections
+        - CSRF
     - observability
       - **monitoring**
     - resiliency
