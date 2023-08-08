@@ -80,6 +80,10 @@ colorFreezeLevel: 2
       - authentication
       - authorization
       - validation
+      - hacking
+        - malware
+        - reverse engineering
+        - social engineering
     - observability
       - **monitoring**
     - resiliency
