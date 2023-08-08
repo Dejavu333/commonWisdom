@@ -19,9 +19,12 @@ colorFreezeLevel: 2
     - async
       - ==queue==
       - ==file==
+      - ==eventstore==
   - data access
     - through shared db
     - through owner
+      - CQRS
+      - API composition
     - through replica
   - deployment
     - monolith
@@ -62,6 +65,9 @@ colorFreezeLevel: 2
               - ==schemathesis==
             - chaos test
             - penetration test
+              - ==masscan==
+              - ==nmap==
+              - ==metasploit==
             - fuzz test
             - soak test
             - stress test
