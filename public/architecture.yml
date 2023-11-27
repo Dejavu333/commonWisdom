@@ -25,8 +25,8 @@ colorFreezeLevel: 2
   - data access
     - through shared db
     - through owner
-      - CQRS
-      - API composition
+    - CQRS
+    - API composition
     - through replica
   - deployment
     - monolith
