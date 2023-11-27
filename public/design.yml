@@ -38,7 +38,8 @@ colorFreezeLevel: 2
       - YAGNI
       - POLP
       - sad path, happy path
-      - fail safe, fail fast
+      - fail safe
+      - fail fast
       - domain driven design
         - aggregates
         - value objects
