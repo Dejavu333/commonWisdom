@@ -5,7 +5,11 @@ colorFreezeLevel: 2
 - *design
 - architecture
   - lifecycle
-    - **devops**
+    - big-bang
+    - code-and-fix
+    - waterfall
+    - spiral
+      - **devops**
   - repository
     - monorepo
     - multirepo
