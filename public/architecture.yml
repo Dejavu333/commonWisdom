@@ -9,7 +9,7 @@ colorFreezeLevel: 2
     - code-and-fix
     - waterfall
     - spiral
-      - **devops**
+      - *devops
   - repository
     - monorepo
     - multirepo
