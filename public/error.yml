@@ -1,0 +1,40 @@
+initialExpandLevel: 1
+colorFreezeLevel: 2
+---
+- error
+  - kind
+    - expected
+      - not found
+      - bad request
+      - timeout
+      - unauth
+      - validation 
+    - unexpected
+
+  - severity
+    - critical
+    - noncritical
+    
+  - where to raise
+    - already raised
+    - on the spot
+    - don't raise any
+  - where to handle
+    - on the spot
+    - bubble up
+    - pass downstream
+    - nowhere 
+- handling strategies
+  - ==swallow==
+  - ==notify==
+  - ==store==
+  - ==log==
+  - ==degrade functionality==
+---
+expected: We have specific strategy for expected errors.
+unexpected: We don't have specific strategy for unexpected errors. Complementary to expected errors.
+critical: The execution cannot continue.
+noncritical: The execution can continue.
+already raised: The error has already been raised by not our code.
+bubble up: An outer scope handles in the same component (let's say frontend).
+pass downstream: A downstream component handles it (let's say some backend service).
