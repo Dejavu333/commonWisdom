@@ -46,10 +46,6 @@ path {
   fill: none;
 }
 
-foreignObject {
-}
-foreignObject > div {
-}
 .active {
   background-color: var(--activeColor);
 }

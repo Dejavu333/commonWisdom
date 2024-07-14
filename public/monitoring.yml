@@ -1,5 +1,6 @@
 colorFreezeLevel: 3
 initialExpandLevel: 1
+colors: [red,blue]
 ---
 - MONITORING
   - collect data

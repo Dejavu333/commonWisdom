@@ -38,6 +38,7 @@
         _markdownStr,
         _parsedOptionsObj["initialExpandLevel"],
         _parsedOptionsObj["colorFreezeLevel"],
+        _parsedOptionsObj["colors"]
       );
     }, 1000);
   });
@@ -49,6 +50,7 @@
     p_markdownStr,
     p_initialExpandLevel,
     p_colorFreezeLevel,
+    p_colors
   ) {
     const transformer = new Transformer();
 
@@ -65,6 +67,7 @@
     const options = markmap.deriveOptions({
       colorFreezeLevel: p_colorFreezeLevel,
       initialExpandLevel: p_initialExpandLevel,
+      color: p_colors
     });
     _wisdomMapObject = Markmap.create("#markmap", options, root);
     console.log(_wisdomMapObject);
