@@ -1,58 +1,58 @@
 colorFreezeLevel: 3
 initialExpandLevel: 1
-colors: [red,blue]
+colors: ["red","blue","#33FF33","yellow"]
 ---
-- MONITORING
-  - collect data
-      - what data
-          - metrics
-              - counter
-              - gauge
-          - logs
-              - structured
-              - unstructured
-          - traces
-      - how
-          - push model
-              - agent
-              - sidecar
-              - service mesh
-              - collector
-              - gateway
-          - pull model    
-              - polling
-              - streaming
-              - scraping
-              - health check
-              
-  - store data
-    - influxdb
-    - graphite
-    - nagios
-    - collectd
-    - elasticsearch
-    - splunk
-    - graylog
-    - logstash
-    - fluentd
-    - jaeger
-    - zipkin
-    - skywalking
-  - use data
-      - alerting
-          - prometheus
-          - alertmanager
-          - icinga
-      - visualization
-          - ==grafana==
-          - kibana
-          - tableau
-          - superset
-      - forecasting
-          - prophet
-          - statsmodels
-          - scikit-learn
-          - tensorflow
+- MONITORING @"orange"
+    - collect data
+        - what data
+            - metrics
+                - counter
+                - gauge
+            - logs
+                - structured
+                - unstructured
+            - traces
+        - how
+            - push model
+                - agent
+                - sidecar
+                - service mesh
+                - collector
+                - gateway
+            - pull model    
+                - polling
+                - streaming
+                - scraping
+                - health check
+                
+    - store data
+        - influxdb
+        - graphite
+        - nagios
+        - collectd
+        - elasticsearch
+        - splunk
+        - graylog
+        - logstash
+        - fluentd
+        - jaeger
+        - zipkin
+        - skywalking
+    - use data
+        - alerting
+            - prometheus
+            - alertmanager
+            - icinga
+        - visualization
+            - ==grafana==
+            - kibana
+            - tableau
+            - superset
+        - forecasting
+            - prophet
+            - statsmodels
+            - scikit-learn
+            - tensorflow
 ---
 
 MONITORING: |
