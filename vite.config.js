@@ -1,9 +1,15 @@
-import { defineConfig } from 'vite'
-import { svelte } from '@sveltejs/vite-plugin-svelte'
+import { defineConfig } from 'vite';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
+import UnoCSS from 'unocss/vite';
+import { viteSingleFile } from 'vite-plugin-singlefile';
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [svelte(
-    {inspector: true}
-  )],
-})
+export default defineConfig(({ command }) => ({
+  plugins: [
+    // UnoCSS(),
+    svelte({ inspector: true }),
+    command === 'build' && viteSingleFile({ removeViteModuleLoader: true }) //npm run build
+  ],
+  build: {
+    minify: true
+  }
+}));

@@ -1,0 +1,38 @@
+colorFreezeLevel: 2
+initialExpandLevel: 1
+colors: ["red","blue","#33FF33","yellow"]
+---
+- SSP
+    - what it's not?
+        - not a full fledged ticketing system
+        - not just a wrapper around ServiceNow
+                
+    - what is it?
+        - admin point of view
+            - guard against improper tickets
+            - guard against well known problems
+        - user point of view
+            - guide to find the problem boundary
+            - rapid way to solve common problems
+            - ticket management panel
+    - what does it change?
+        - admin point of view
+            - nothing changes regarding the workflow
+        - user point of view
+            - they get to use a new straightfoward UI
+
+    - what it can be?
+        - AI assisted
+        - fully customizable
+        - good source of stats
+        - warehouse of other features 
+---
+
+SSP: |
+    Stands for self service portal. It wraps around the ServiceNow API and makes life easier for both the submitter and submittee.
+    
+collect data: |
+    The process of 
+    gathering data from a software system.
+how: |
+    The data can be collected in two ways, via the push model or the pull model.

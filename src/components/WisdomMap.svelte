@@ -6,7 +6,6 @@
   import { WEBSERVER_HOST } from "../constants";
   import yaml, { parse } from "yaml";
   import ErrorPage from "./ErrorPage.svelte";
-  //todo MAKE avoiding circle events more performant
 
   //--------------------------------------------------
   // props
@@ -23,35 +22,44 @@
   let _parsedOptionsObj = null;
 
   onMount(() => {
-    if (!_ChosenTopic) {
-      _error = "NO_TOPIC";
-      return;
-    }
-    getInfosByTopic(_ChosenTopic); //sets _markdownStr and _parsedOptionsObj and _parsedSubTopicInfosObj
+    // if (!_ChosenTopic) {
+    //   _error = "NO_TOPIC";
+    //   return;
+    // } //TODO
+    addGetInfosHandler();
+    // getInfosByTopic(_ChosenTopic); //sets _markdownStr and _parsedOptionsObj and _parsedSubTopicInfosObj
 
-    setTimeout(() => {
-      if (!_markdownStr) {
-        _error = "NON_EXISTING_TOPIC";
-        return;
-      }
-      initWisdomMap(
-        _markdownStr,
-        _parsedOptionsObj["initialExpandLevel"],
-        _parsedOptionsObj["colorFreezeLevel"],
-        _parsedOptionsObj["colors"]
-      );
-    }, 1000);
+    // setTimeout(() => {
+    //   if (!_markdownStr) {
+    //     _error = "NON_EXISTING_TOPIC";
+    //     return;
+    //   }
+    //   initWisdomMap(
+    //     _markdownStr,
+    //     _parsedOptionsObj["initialExpandLevel"],
+    //     _parsedOptionsObj["colorFreezeLevel"],
+    //     _parsedOptionsObj["colors"],
+    //   );
+    // }, 1000);
   });
 
   //--------------------------------------------------
   // functions
   //--------------------------------------------------
+  function removeExistingMarkmap() {
+    const existingMarkmap = document.querySelector("#markmap");
+    if (existingMarkmap) {
+      existingMarkmap.innerHTML = "";
+    }
+  }
+
   function initWisdomMap(
     p_markdownStr,
     p_initialExpandLevel,
     p_colorFreezeLevel,
-    p_colors
+    p_colors,
   ) {
+    removeExistingMarkmap();
     const transformer = new Transformer();
 
     // 0. transform markdown to data
@@ -67,7 +75,7 @@
     const options = markmap.deriveOptions({
       colorFreezeLevel: p_colorFreezeLevel,
       initialExpandLevel: p_initialExpandLevel,
-      color: p_colors
+      color: p_colors,
     });
     _wisdomMapObject = Markmap.create("#markmap", options, root);
     console.log(_wisdomMapObject);
@@ -191,16 +199,49 @@
     return currentDataPath.split(".").slice(0, -1).join(".");
   }
 
-  async function getInfosByTopic(p_topic) {
-    fetch(WEBSERVER_HOST + `/${p_topic}.yml`)
-      .then((response) => response.text())
-      .then((infosYML) => {
-        const parsedInfos = parseYML(infosYML);
-        _parsedSubTopicInfosObj = parsedInfos.parsedSubTopicInfosObj;
-        _parsedOptionsObj = parsedInfos.parsedOptionsObj;
-        _markdownStr = parsedInfos.markmapStr;
-        console.log("fetched:\n" + _markdownStr);
+  function addGetInfosHandler() {
+    document
+      .getElementById("fileInput")
+      .addEventListener("change", function (event) {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const infosYML = e.target.result;
+            const parsedInfos = parseYML(infosYML);
+            _parsedSubTopicInfosObj = parsedInfos.parsedSubTopicInfosObj;
+            _parsedOptionsObj = parsedInfos.parsedOptionsObj;
+            _markdownStr = parsedInfos.markmapStr;
+            console.log("fetched:\n" + _markdownStr);
+          };
+          reader.readAsText(file);
+        }
+
+        setTimeout(() => {
+          if (!_markdownStr) {
+            _error = "NON_EXISTING_TOPIC";
+            return;
+          }
+          initWisdomMap(
+            _markdownStr,
+            _parsedOptionsObj["initialExpandLevel"],
+            _parsedOptionsObj["colorFreezeLevel"],
+            _parsedOptionsObj["colors"],
+          );
+        }, 1000);
       });
+  }
+
+  async function getInfosByTopic(p_topic) {
+    // fetch(WEBSERVER_HOST + `/${p_topic}.yml`)
+    //   .then((response) => response.text())
+    //   .then((infosYML) => {
+    //     const parsedInfos = parseYML(infosYML);
+    //     _parsedSubTopicInfosObj = parsedInfos.parsedSubTopicInfosObj;
+    //     _parsedOptionsObj = parsedInfos.parsedOptionsObj;
+    //     _markdownStr = parsedInfos.markmapStr;
+    //     console.log("fetched:\n" + _markdownStr);
+    //   });
   }
 
   function parseYML(p_ymlStr) {
@@ -217,6 +258,9 @@
 <!------------------------------------------------------------------------------------------------------->
 <!------------------------------------------------------------------------------------------------------->
 <ErrorPage _Error={_error} />
+@{#if !_ChosenTopic}
+  <input type="file" id="fileInput" accept=".yml,.yaml" />
+{/if}
 <svg id="markmap" style="width: 100%; height: 100vh"></svg>
 <InfoWindow
   _SubTopic={_selectedSubTopic}
