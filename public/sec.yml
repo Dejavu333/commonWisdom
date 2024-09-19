@@ -1,0 +1,95 @@
+initialExpandLevel: 1
+colorFreezeLevel: 2
+---
+- cyber security
+  - mapping
+  - STRED
+    - spoofing
+    - tempering
+    - repudiation
+    - elevation of previliges
+    - denial of service
+  - defense in depth
+    - MFA - prove he is who he says he is 
+    - MDM - patches and versions are in tact
+    - EDR - like a nextgen antivirus 
+    - firewalls
+    - vulnarability chekcs on the server
+    - encrypt data in the data stores
+  - POLP
+    - annual recert
+    - 'just in case' is the opposite of polp
+  - separation of duties - scylla 6 people to open 
+  - sec by design not at the end
+  - security is a tradeoff between cozy and secure
+  - obscure is not secure -  use known open algorithms AES, RSA and not black boxes if the inventor tells its unbreakable it doesnt mean it is
+  - investigate url
+    - certs
+    - date of registration
+    - redirects
+    - visitors
+    - ==scamadvisor==
+  - malware analysis
+    - ==hybrid-analysis.com==
+    - ==virustotal.com==
+    - ==pestudio== 
+      - programname, overlay, certs
+  - process management
+    - ==volatility==
+    - ==windows sysinternals process explorer==
+      - process view
+      - tcp view
+  - am i hacked
+    - sysinternals autoruns
+      - go to path and upload the source to malware analysis
+      - outgoing tcp connections
+    - task scheduler
+      - maybe no malware is running but windows does harmful things on behalf of attacker
+    - pestudio to analyze exe
+    - hex editor to see the inside the file
+      - we can catch artificial file size enlargement with many dots thats a sign of malware, if the code is sliced and has many white space or gibberish between the slices the malware analyzer engines have much more difficult time
+    - comodo firewall gives full control
+  - malicious DLL
+  - firewall
+    - system firewall is not enough because malware can run cmd and add new rule
+    - hardware firewall is the best
+    - keep the firewall separate from the os, 3rd party firewall is okey
+  
+  - what is security
+    - analysis - catch vulnarabilities
+    - detection - catch threats on the spot
+    - hunt - catch already existing threats
+    - engineering tools of the latter three
+
+  - how to start
+    - survey to decide white, grey, black box testing
+    - sign a contract where targets are defined
+     - maybe you cant attack certain endpoints beacuse there are 3rd party resources
+    - firewall - in black box test we try to bypass it (not always in grey and white)
+      - if can't be bypassed add attack ip as a rule and go to the next layer of the security onion
+    - audit api documentation  - up to date, valid etc.
+    - test rate limiting
+    - source code
+      - manual static code review 
+      - automated static code review
+      - dynamic code review
+        - intercepting requests and responses and find weaknesses
+    - ddos, dos
+    - social engineering
+    
+
+
+---
+mapping: understanding and visualizing
+  a network's physical and logical connections
+malicious DLL: |
+ One is static linking where you link everything when the program is compiled and effectively create a copy of each and every function that is referenced within the executable code itself. The major downside to this is that if you have 20 programs currently running, each of which reference the same libraries, and you load up all of that, it takes up a lot of memory space—that’s 20 times the memory space.
+ The way Windows gets around this problem is by using what we call dynamic linking, which means each library can have its own memory space and exist independently of other executables. If executables want to access the library, they can use something called dynamic linking and share the memory space. Sounds pretty efficient, right?
+ But malware authors have been exploiting this technique for ages now on Windows using DLL injection, which you might have heard of, and a lot of other techniques through which they can do their dirty work using a separate executable or a system executable. By the way, if you’re one of those people who relies on Task Manager to find malware, this is something that you should be aware of because if a malicious DLL is injected into a legitimate process, you will not see a malware process running in memory because it’s not—it’s a legitimate executable. It could very well be an essential Windows operating system one that would be carrying out the malicious 
+ activities because it’s actually executing functions that are part of the malicious DLL file.
+
+test rate limiting: |
+  not same as dos, here we try to bypass the rate limit and prove it doesn't work not trying to make the service unavailable
+
+social engineering: |
+  this is tipycally separate from the above ones, can be sold in a another package but still part of the pen testing
