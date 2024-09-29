@@ -1,95 +1,751 @@
 initialExpandLevel: 1
 colorFreezeLevel: 2
 ---
-- cyber security
-  - mapping
-  - STRED
-    - spoofing
-    - tempering
-    - repudiation
-    - elevation of previliges
-    - denial of service
-  - defense in depth
-    - MFA - prove he is who he says he is 
-    - MDM - patches and versions are in tact
-    - EDR - like a nextgen antivirus 
-    - firewalls
-    - vulnarability chekcs on the server
-    - encrypt data in the data stores
-  - POLP
-    - annual recert
-    - 'just in case' is the opposite of polp
-  - separation of duties - scylla 6 people to open 
-  - sec by design not at the end
-  - security is a tradeoff between cozy and secure
-  - obscure is not secure -  use known open algorithms AES, RSA and not black boxes if the inventor tells its unbreakable it doesnt mean it is
-  - investigate url
-    - certs
-    - date of registration
-    - redirects
-    - visitors
-    - ==scamadvisor==
-  - malware analysis
-    - ==hybrid-analysis.com==
-    - ==virustotal.com==
-    - ==pestudio== 
-      - programname, overlay, certs
-  - process management
-    - ==volatility==
-    - ==windows sysinternals process explorer==
-      - process view
-      - tcp view
-  - am i hacked
-    - sysinternals autoruns
-      - go to path and upload the source to malware analysis
-      - outgoing tcp connections
-    - task scheduler
-      - maybe no malware is running but windows does harmful things on behalf of attacker
-    - pestudio to analyze exe
-    - hex editor to see the inside the file
-      - we can catch artificial file size enlargement with many dots thats a sign of malware, if the code is sliced and has many white space or gibberish between the slices the malware analyzer engines have much more difficult time
-    - comodo firewall gives full control
-  - malicious DLL
-  - firewall
-    - system firewall is not enough because malware can run cmd and add new rule
-    - hardware firewall is the best
-    - keep the firewall separate from the os, 3rd party firewall is okey
-  
-  - what is security
-    - analysis - catch vulnarabilities
-    - detection - catch threats on the spot
-    - hunt - catch already existing threats
-    - engineering tools of the latter three
+- Cyber Security
 
-  - how to start
-    - survey to decide white, grey, black box testing
-    - sign a contract where targets are defined
-     - maybe you cant attack certain endpoints beacuse there are 3rd party resources
-    - firewall - in black box test we try to bypass it (not always in grey and white)
-      - if can't be bypassed add attack ip as a rule and go to the next layer of the security onion
-    - audit api documentation  - up to date, valid etc.
-    - test rate limiting
-    - source code
-      - manual static code review 
-      - automated static code review
-      - dynamic code review
-        - intercepting requests and responses and find weaknesses
-    - ddos, dos
-    - social engineering
-    
+  - What is Security?
+    - Analysis
+      - Forensics - already existing threats
+        - Malware Analysis
+          - Types of Malware
+            - Viruses
+            - Worms
+            - Trojans
+              - Malicious DLL
+            - Ransomware
+            - Spyware
+            - Adware
+            - Rootkits
+          - Hybrid Analysis
+          - VirusTotal
+          - PeStudio
+          - Malware Bazaar
+
+          - Process Management
+            - Volatility
+            - Windows Sysinternals Process Explorer
+        - Network Mapping
+          - Nmap
+        - Network Traffic Analysis
+          - Wireshark
+          - Windows Sysinternals TCPView
+        
+        - Sysinternals Autoruns
+          - Check paths and upload sources to malware analysis
+          - Outgoing TCP connections
+        - Task Scheduler
+          - Windows tasks that may be harmful
+        - File Visualizer
+          - BinVis.io
+            - Detect hidden file extensions or enlarged file sizes
+        - Hex Editor to Inspect Files
+          - Detect artificial file size enlargement or obfuscated code
+        - Comodo Firewall for Full Control
+        - Advanced Persistent Threats (APTs)
+          - Identification
+          - Mitigation
+
+
+      - Penetration Testing - possible threats
+        - Planning and Reconnaissance
+        - Attack
+        - Reporting and Remediation
+        - Tools
+          - Metasploit
+          - SHODAN - banner world search
+          - aircrack-ng
+          - Ghidra
+          - HackRF
+
+
+    - Prevention
+        - Multi-Factor Authentication (MFA)
+        - Mobile Device Management (MDM)
+        - Encrypt Data in Data Stores
+        - Endpoint Detection and Response (EDR)
+        - Intrusion Detection Systems (IDS)
+          - ==Snort/Suricata==
+        - Intrusion Prevention Systems (IPS)
+          - ==Bro/Zeek==
+        - Firewalls
+          - System Firewall
+          - Hardware Firewall
+          - Separate Firewall from OS
+        - Network Segmentation
+        - Honeypots and Honeynets
+        - Log Management
+        - Monitoring
+          - Security Onion - linux distro with tools out of the box
+            - ==OSSEC/Wazuh==     
+            - ==netsniff-ng==
+            - ELK
+            - Sguil
+            - Squert
+            - Capme
+            - CyberChef
+            - Timeline
+            - Networkminer
+            - Wireshark
+        - Incident Response
+        - Investigate URL
+          - Certificates
+          - Date of Registration
+          - Redirects
+          - Visitors
+          - ScamAdvisor
+        - Password-Protected Files
+
+    - Engineering the tools/archs for analysis and prevention
+
+
+  - Threat Modeling Methodologies
+    - STRIDE
+      - Spoofing
+      - Tampering
+      - Repudiation
+      - Information Disclosure
+      - Denial of Service
+      - Elevation of Privileges
+    - Attack Trees
+    - DREAD
+    - PASTA
+    - VAST
+
+  - Principles
+    - Security Tradeoff -> Cozy vs. Secure
+    - Security by Design
+    - Obscurity is Not Security
+    - Separation of Duties
+    - Principle of Least Privilege (POLP)
+      - Revise annually
+      - Just in case is the opposite of POLP
+    - Defense in Depth
+    - You can't defend what you don't know
+    - Don't assume something is on the port it supposed to be on
+    - Chain vulnarabilites
+
+  - Security Frameworks
+    - NIST
+    - ISO/IEC 27001
+    - CIS Controls
+    - COBIT
+
+  - Security Assessment
+    - How to Start
+      - Survey
+      - Contract
+        - Some endpoints may be off-limits due to third-party resources
+
+  - Privacy and Identity Protection
+    - How Identity is Tracked
+      - Browser Fingerprint
+      - Device Fingerprint
+        - Windows Registry contains unique identifiers
+        - MS Windows License Key
+        - MS ID (Email Address)
+        - CPU ID
+        - MAC Address
+        - Use open-source browsers to avoid tracking
+      - Mobile
+        - IMEI
+        - IMSI
+        - UUID
+        - Soft Identifiers
+          - Mobile devices constantly send telemetry data
+        - Use open-source OS to avoid tracking
+      - Web Workers
+        - Clear cookies and history to kill web workers
+      - WiFi Triangulation
+        - Not affected by airplane mode, can't be blocked
+      - Cloud Fingerprinting
+      - Avoid buying burner phones when your main phone is with you
+      - Use two separate systems for better security
+      - Spread false information to create dead ends
+    - Tools
+      - Anonsurf
+        - Beware of exit nodes controlled by unwanted entities
+      - Proxychains
+    - Data Anonymization Techniques
+    - Privacy Laws and Regulations
+      - GDPR
+      - CCPA
+      - HIPAA
+      - FISMA
+    - Virtual Private Networks (VPN)
+      - Types of VPNs
+        - Remote Access VPN
+        - Site-to-Site VPN
+        - Client-to-Site VPN
+      - VPN Protocols
+        - OpenVPN
+        - L2TP/IPsec
+        - PPTP
+        - IKEv2/IPsec
+        - WireGuard
+      - VPN Security Best Practices
+        - No-Log Policies
+        - Strong Encryption
+        - Kill Switch
+        - DNS Leak Protection
+
+  - Zero-Day Exploits
+    - Identification
+    - Mitigation Strategies
+    - Case Studies
+
+  - Incident Response
+    - Preparation
+      - Incident Response Plan
+      - Incident Response Team
+      - Communication Plan
+    - Identification
+      - Detecting Incidents
+      - Incident Classification
+    - Containment
+      - Short-term Containment
+      - Long-term Containment
+    - Eradication
+      - Root Cause Analysis
+      - Removing Threats
+    - Recovery
+      - System Restoration
+      - Data Recovery
+    - Lessons Learned
+      - Post-Incident Review
+      - Improvement Plan
+
+  - Technologies
+    - AI in Cyber Security
+      - Machine Learning
+      - Threat Detection
+      - Automated Response
+    - Quantum Computing
+      - Quantum Cryptography
+      - Post-Quantum Cryptography
+    - Blockchain Security
+      - Smart Contracts
+      - Decentralized Applications (DApps)
+      - Consensus Mechanisms
+    - Internet of Things (IoT) Security
+      - Device Authentication
+      - Secure Communication
+      - Firmware Updates
+    - Cloud Security
+      - Shared Responsibility Model
+      - Cloud Access Security Brokers (CASBs)
+      - Secure Cloud Architecture
 
 
 ---
-mapping: understanding and visualizing
-  a network's physical and logical connections
+Prevention: |
+  By Design -> Immune to threats
+
+VPN: hides the IP from the destination
+  there is a vpn client and a vpn server the client makes connection to the server
+  the vpn client can be the router not the software on the user's device (otherwise if you only use vpn software on one machine in your network
+  then a guest who logs in to instagram from his phone from your network now your geolocation is paired)
+  so the target only sees the ip of the vpn server and not the user's original ip
+  if the vpn server don't collect logs they can't provide anything to goverment
+  if there's a listener from an agency at the vpn server they can see the incoming connections source ip
+  ip address as default don't show location data but some apps gets your geolocation data and pairs it with your ip and sells it as a pair
+  the vpn company can sell your data
+  instead of a vpn you can use tor
+
 malicious DLL: |
- One is static linking where you link everything when the program is compiled and effectively create a copy of each and every function that is referenced within the executable code itself. The major downside to this is that if you have 20 programs currently running, each of which reference the same libraries, and you load up all of that, it takes up a lot of memory space—that’s 20 times the memory space.
- The way Windows gets around this problem is by using what we call dynamic linking, which means each library can have its own memory space and exist independently of other executables. If executables want to access the library, they can use something called dynamic linking and share the memory space. Sounds pretty efficient, right?
- But malware authors have been exploiting this technique for ages now on Windows using DLL injection, which you might have heard of, and a lot of other techniques through which they can do their dirty work using a separate executable or a system executable. By the way, if you’re one of those people who relies on Task Manager to find malware, this is something that you should be aware of because if a malicious DLL is injected into a legitimate process, you will not see a malware process running in memory because it’s not—it’s a legitimate executable. It could very well be an essential Windows operating system one that would be carrying out the malicious 
- activities because it’s actually executing functions that are part of the malicious DLL file.
+  One is static linking where you link everything when the program is compiled and effectively create a copy of each and every function that is referenced within the executable code itself. The major downside to this is that if you have 20 programs currently running, each of which reference the same libraries, and you load up all of that, it takes up a lot of memory space—that’s 20 times the memory space.
+  The way Windows gets around this problem is by using what we call dynamic linking, which means each library can have its own memory space and exist independently of other executables. If executables want to access the library, they can use something called dynamic linking and share the memory space. Sounds pretty efficient, right?
+  But malware authors have been exploiting this technique for ages now on Windows using DLL injection, which you might have heard of, and a lot of other techniques through which they can do their dirty work using a separate executable or a system executable. By the way, if you’re one of those people who relies on Task Manager to find malware, this is something that you should be aware of because if a malicious DLL is injected into a legitimate process, you will not see a malware process running in memory because it’s not—it’s a legitimate executable. It could very well be an essential Windows operating system one that would be carrying out the malicious
+  activities because it’s actually executing functions that are part of the malicious DLL file.
 
-test rate limiting: |
-  not same as dos, here we try to bypass the rate limit and prove it doesn't work not trying to make the service unavailable
+file visualizer: |
+  There are obfuscators out there that are used for legitimate programs that
+  want to hide their internal workings and make it difficult to analyse the code that do exactly this.
+  The tool basically inserts a bunch of random nonsense throughout the executable but does so in a
+  manner that would never result in those instructions being executed.
+  You''ll usually see this being called "dead code injection" or something like that in the tool's features list.
 
-social engineering: |
-  this is tipycally separate from the above ones, can be sold in a another package but still part of the pen testing
+
+
+Cyber Security: The practice of protecting systems, networks, and programs from digital attacks. These cyberattacks are usually aimed at accessing, changing, or destroying sensitive information, extorting money from users, or interrupting normal business processes.
+
+Fundamentals: The basic principles and concepts that form the foundation of cybersecurity practices and strategies.
+
+Introduction to Security: An overview of the key concepts, principles, and importance of security in the digital world.
+
+What is Security?: The measures taken to protect a computer or computer system against unauthorized access or attack.
+
+Analysis: The process of examining data to identify patterns, anomalies, or potential security threats.
+
+Detection: The identification of potential security incidents through monitoring and analysis of data.
+
+Hunt/Forensics: The proactive search for threats and the investigation of security incidents to understand their origin and impact.
+
+Engineering Tools: Software and hardware tools used to design, implement, and manage security measures.
+
+Principles: The fundamental concepts that guide the development and implementation of security measures.
+
+Security Tradeoff: The balance between security measures and usability, cost, and performance.
+
+Security by Design: The practice of integrating security into the design and development of systems and applications from the outset.
+
+Obscurity is Not Security: The principle that security should not rely on secrecy of the design or implementation.
+
+Separation of Duties: The practice of dividing responsibilities among different individuals to reduce the risk of fraud or error.
+
+Principle of Least Privilege (POLP): The practice of granting users the minimum levels of access – or permissions – needed to perform their job functions.
+
+Annual Recertification: The process of regularly reviewing and renewing access permissions to ensure they are still appropriate.
+
+Just in Case is the opposite of POLP: Granting access permissions only when necessary, rather than preemptively.
+
+Security Frameworks: Structured sets of guidelines and best practices for managing and improving an organization's cybersecurity posture.
+
+NIST: The National Institute of Standards and Technology's framework for improving critical infrastructure cybersecurity.
+
+ISO/IEC 27001: An international standard for managing information security.
+
+CIS Controls: A set of best practices for securing IT systems and data against cyber threats.
+
+COBIT: A framework for developing, implementing, monitoring, and improving IT governance and management practices.
+
+Threat Modeling: The process of identifying, assessing, and prioritizing potential threats to a system.
+
+Methodologies: Different approaches and techniques used in threat modeling.
+
+STRIDE: A threat modeling framework that categorizes threats into six types Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, and Elevation of Privileges.
+
+Spoofing: Impersonating another user or device.
+
+Tampering: Unauthorized modification of data.
+
+Repudiation: Denying the occurrence of an action.
+
+Information Disclosure: Unauthorized access to information.
+
+Denial of Service: Disrupting the availability of a service.
+
+Elevation of Privileges: Gaining unauthorized access to higher levels of permissions.
+
+Attack Trees: A hierarchical diagram representing potential attacks on a system.
+
+DREAD: A risk assessment model used to quantify, compare, and prioritize the amount of risk presented by each evaluated threat.
+
+PASTA: A process for attack simulation and threat analysis.
+
+VAST: A threat modeling methodology that integrates with agile development processes.
+
+Tools: Software applications used to facilitate threat modeling.
+
+Microsoft Threat Modeling Tool: A tool for identifying and mitigating potential security issues early in the development process.
+
+OWASP Threat Dragon: An open-source threat modeling tool.
+
+ThreatModeler: An automated threat modeling tool that helps identify, predict, and define threats.
+
+Defense Mechanisms: Strategies and technologies used to protect systems and data from cyber threats.
+
+Defense in Depth: A layered approach to security that uses multiple defenses to protect against threats.
+
+Multi-Factor Authentication (MFA): A security system that requires more than one method of authentication to verify the user's identity.
+
+Mobile Device Management (MDM): Software that secures, monitors, manages, and supports mobile devices deployed across mobile operators, service providers, and enterprises.
+
+Endpoint Detection and Response (EDR): Tools and solutions that monitor end-user devices to detect and respond to cyber threats.
+
+Firewalls: Network security devices that monitor and control incoming and outgoing network traffic based on predetermined security rules.
+
+Vulnerability Checks on the Server: Regular assessments to identify and address security weaknesses in server systems.
+
+Encrypt Data in Data Stores: The practice of converting data into a coded format to prevent unauthorized access.
+
+System Firewall: A firewall that is part of the operating system.
+
+Hardware Firewall: A physical device that filters traffic between a network and the internet.
+
+Separate Firewall from OS: The practice of using a dedicated firewall device rather than relying solely on the operating system's firewall.
+
+Intrusion Detection Systems (IDS): Devices or software applications that monitor networks or systems for malicious activity or policy violations.
+
+Intrusion Prevention Systems (IPS): Systems that monitor network traffic to detect and prevent vulnerability exploits.
+
+Network Segmentation: The practice of dividing a network into smaller segments to improve security and performance.
+
+Honeypots and Honeynets: Decoy systems or networks designed to attract and analyze potential attackers.
+
+Security Information and Event Management (SIEM): A solution that provides real-time analysis of security alerts generated by applications and network hardware.
+
+Log Management: The process of collecting, storing, and analyzing log data.
+
+Real-time Monitoring: The continuous observation of network and system activity to detect and respond to security incidents.
+
+Incident Response: The process of identifying, managing, and mitigating security incidents.
+
+Malware and Threat Analysis: The study and examination of malicious software and other cyber threats.
+
+Malware Analysis: The process of understanding the behavior and purpose of a suspicious file or URL.
+
+Hybrid Analysis: A combination of static and dynamic analysis techniques to examine malware.
+
+VirusTotal: A free online service that analyzes files and URLs for viruses, worms, trojans, and other kinds of malicious content.
+
+PeStudio: A tool for analyzing executable files.
+
+Malware Bazaar: A repository of malware samples for research and analysis.
+
+Program Name, Overlay, Certificates: Specific attributes of malware that can be analyzed to understand its behavior.
+
+Types of Malware: Different categories of malicious software.
+
+Viruses: Malicious programs that replicate themselves and spread to other files.
+
+Worms: Standalone malware that replicates itself to spread to other computers.
+
+Trojans: Malicious software disguised as legitimate software.
+
+Ransomware: Malware that encrypts a victim's data and demands payment for the decryption key.
+
+Spyware: Software that secretly monitors and collects information about users.
+
+Adware: Software that automatically displays or downloads advertising material.
+
+Rootkits: Malicious software designed to gain unauthorized access to a computer and often hide its presence.
+
+Malicious DLL: Dynamic Link Libraries that contain malicious code.
+
+Password-Protected Files: Files that require a password to access, often used to protect sensitive information.
+
+Am I Hacked?: Methods and tools to determine if a system has been compromised.
+
+Sysinternals Autoruns: A tool for managing startup programs and detecting malicious entries.
+
+Check paths and upload sources to malware analysis: Verifying the legitimacy of startup programs and analyzing suspicious ones.
+
+Outgoing TCP connections: Monitoring network connections to detect unauthorized communication.
+
+Task Scheduler: A Windows feature that can be used to schedule tasks, including potentially harmful ones.
+
+Windows tasks that may be harmful: Identifying and removing malicious scheduled tasks.
+
+PeStudio to Analyze Executables: Using PeStudio to examine executable files for malicious behavior.
+
+File Visualizer: Tools for visualizing file structures and contents.
+
+BinVis.io: A tool for visualizing binary files to detect anomalies.
+
+Detect hidden file extensions or enlarged file sizes: Identifying suspicious file attributes.
+
+Hex Editor to Inspect Files: A tool for examining the raw data of files.
+
+Detect artificial file size enlargement or obfuscated code: Identifying signs of malicious manipulation.
+
+Comodo Firewall for Full Control: A firewall solution that provides comprehensive control over network traffic.
+
+Advanced Persistent Threats (APTs): Prolonged and targeted cyberattacks aimed at stealing data or disrupting operations.
+
+Identification: Detecting the presence of APTs within a network.
+
+Mitigation: Strategies to defend against and respond to APTs.
+
+Network and Process Management: The administration and monitoring of network and system processes to ensure security and efficiency.
+
+Process Management: The oversight and control of system processes.
+
+Volatility: A memory forensics tool for analyzing RAM.
+
+Windows Sysinternals Process Explorer: A tool for viewing detailed information about system processes.
+
+Process View: Displaying information about running processes.
+
+TCP View: Monitoring network connections.
+
+Network Mapping: The process of discovering and documenting network devices and their connections.
+
+Investigate URL: The examination of URLs to determine their legitimacy and potential risks.
+
+Certificates: Verifying the authenticity of SSL/TLS certificates.
+
+Date of Registration: Checking the registration date of a domain to assess its trustworthiness.
+
+Redirects: Analyzing URL redirects to detect malicious behavior.
+
+Visitors: Monitoring traffic to a URL to identify suspicious patterns.
+
+ScamAdvisor: A tool for assessing the trustworthiness of websites based on various factors.
+
+Network Traffic Analysis: The process of capturing and examining network traffic to identify anomalies and potential threats.
+
+Packet Sniffing: The practice of intercepting and logging traffic passing over a network.
+
+Wireshark: A network protocol analyzer that captures and displays data packets for analysis.
+
+tcpdump: A command-line packet analyzer tool.
+
+Network Protocols: The rules and conventions for communication between network devices.
+
+TCP/IP: The suite of communication protocols used to interconnect network devices on the internet.
+
+UDP: A communication protocol used for time-sensitive transmissions such as video playback or DNS lookups.
+
+HTTP/HTTPS: Protocols used for transmitting hypertext requests and information on the internet.
+
+FTP/SFTP: Protocols used for transferring files between a client and server on a network.
+
+DNS: The system that translates domain names into IP addresses.
+
+Security Assessment: The process of evaluating the security posture of an organization to identify vulnerabilities and recommend improvements.
+
+How to Start: Initial steps to begin a security assessment.
+
+Survey: Gathering information about the organization's systems and security measures.
+
+Contract: Establishing the scope and terms of the security assessment.
+
+Some endpoints may be off-limits due to third-party resources: Identifying areas that cannot be tested due to external dependencies.
+
+Firewall: Assessing the effectiveness of firewall configurations.
+
+If bypass fails, add attack IP as a rule and move to the next security layer: Strategies for testing firewall defenses.
+
+Audit API Documentation: Reviewing API documentation to identify potential security weaknesses.
+
+Test Rate Limiting: Evaluating the effectiveness of rate limiting controls to prevent abuse.
+
+Source Code: Analyzing the source code for security vulnerabilities.
+
+Manual Static Code Review: A thorough examination of the source code by a human reviewer.
+
+Automated Static Code Review: Using tools to automatically scan the source code for vulnerabilities.
+
+Dynamic Code Review: Testing the application in a running state to identify security issues.
+
+Intercept requests and responses to find weaknesses: Analyzing the communication between the client and server.
+
+DDoS, DoS: Assessing the organization's defenses against Distributed Denial of Service and Denial of Service attacks.
+
+Social Engineering: Testing the organization's susceptibility to social engineering attacks.
+
+Proxymark: A tool used in social engineering assessments.
+
+Forensics: The application of investigative techniques to determine the cause and impact of security incidents.
+
+Network Adapter: Hardware used to connect a computer to a network.
+
+Rubber Ducky: A USB device used to execute pre-configured scripts on a target machine.
+
+LAN Turtle: A covert network penetration testing tool.
+
+Wireless Card with Antenna (TP-Link): A device used for wireless network assessments.
+
+Ubertooth: An open-source Bluetooth testing tool.
+
+HackRF: A software-defined radio platform for signal analysis.
+
+WiFi Pineapple: A wireless auditing platform.
+
+Bash Bunny: A multi-function USB attack tool.
+
+Rogue Access Point: A wireless access point that is installed on a secure network without authorization.
+
+Physical access is crucial: The importance of physical access in certain types of attacks.
+
+Penetration Testing: Simulated cyberattacks on a system to identify vulnerabilities.
+
+Planning and Reconnaissance: The initial phase of penetration testing, involving information gathering and planning.
+
+Scanning: Identifying open ports, services, and vulnerabilities.
+
+Gaining Access: Exploiting vulnerabilities to gain unauthorized access.
+
+Maintaining Access: Ensuring persistent access to the compromised system.
+
+Analysis and Reporting: Documenting findings and providing recommendations for remediation.
+
+Vulnerability Assessment: The process of identifying, quantifying, and prioritizing vulnerabilities in a system.
+
+Automated Scanning Tools: Software that automatically scans for vulnerabilities.
+
+Manual Testing: Human-led testing to identify vulnerabilities that automated tools may miss.
+
+Reporting and Remediation: Documenting vulnerabilities and recommending fixes.
+
+Privacy and Identity Protection: Measures and practices to protect personal information and maintain privacy.
+
+How Identity is Tracked: Methods used to track and identify individuals.
+
+Browser Fingerprint: Unique identifiers collected by web browsers.
+
+Device Fingerprint: Unique identifiers collected from devices.
+
+Windows Registry contains unique identifiers: Specific data stored in the Windows Registry.
+
+MS Windows License Key: A unique identifier for a Windows installation.
+
+MS ID (Email Address): A unique identifier associated with a Microsoft account.
+
+CPU ID: A unique identifier for a computer's processor.
+
+MAC Address: A unique identifier for a network interface.
+
+Use open-source browsers to avoid tracking: Recommendations for maintaining privacy.
+
+Mobile: Methods used to track mobile devices.
+
+IMEI: A unique identifier for a mobile device.
+
+IMSI: A unique identifier for a mobile subscriber.
+
+UUID: A unique identifier for a mobile application.
+
+Soft Identifiers: Non-permanent identifiers used for tracking.
+
+Mobile devices constantly send telemetry data: Information sent by mobile devices.
+
+Use open-source OS to avoid tracking: Recommendations for maintaining privacy.
+
+Web Workers: Background scripts that run in web browsers.
+
+Clear cookies and history to kill web workers: Recommendations for maintaining privacy.
+
+WiFi Triangulation: A method of determining a device's location using WiFi signals.
+
+Not affected by airplane mode, can't be blocked: Limitations of privacy measures.
+
+Cloud Fingerprinting: Identifying users based on their interactions with cloud services.
+
+Avoid buying burner phones when your main phone is with you: Recommendations for maintaining privacy.
+
+Use two separate systems for better security: Recommendations for maintaining privacy.
+
+Spread false information to create dead ends: Recommendations for maintaining privacy.
+
+Anonsurf: A tool for anonymizing internet traffic.
+
+Beware of exit nodes controlled by unwanted entities: Risks associated with anonymizing tools.
+
+Proxychains: A tool for routing internet traffic through multiple proxies.
+
+Data Anonymization Techniques: Methods for removing personally identifiable information from data sets.
+
+Privacy Laws and Regulations: Legal frameworks governing the protection of personal information.
+
+GDPR: The General Data Protection Regulation, a European Union law on data protection and privacy.
+
+CCPA: The California Consumer Privacy Act, a state statute intended to enhance privacy rights and consumer protection.
+
+HIPAA: The Health Insurance Portability and Accountability Act, a US law designed to provide privacy standards to protect patients' medical records.
+
+FISMA: The Federal Information Security Management Act, a US law aimed at protecting government information and assets.
+
+Zero-Day Exploits: Vulnerabilities that are unknown to those who should be interested in mitigating the vulnerability.
+
+Mitigation Strategies: Methods for protecting against zero-day exploits.
+
+Case Studies: Examples of zero-day exploits and their impact.
+
+Virtual Private Networks (VPN): Technologies that create a secure connection over a less secure network.
+
+Types of VPNs: Different configurations and uses of VPNs.
+
+Remote Access VPN: A VPN that allows individual users to connect to a private network from a remote location.
+
+Site-to-Site VPN: A VPN that connects entire networks to each other.
+
+Client-to-Site VPN: A VPN that connects individual devices to a network.
+
+VPN Protocols: The rules and conventions for establishing VPN connections.
+
+OpenVPN: An open-source VPN protocol.
+
+L2TP/IPsec: A combination of Layer 2 Tunneling Protocol and Internet Protocol Security.
+
+PPTP: Point-to-Point Tunneling Protocol, an older VPN protocol.
+
+IKEv2/IPsec: A VPN protocol that provides strong security and performance.
+
+WireGuard: A modern, high-performance VPN protocol.
+
+VPN Security Best Practices: Recommendations for using VPNs securely.
+
+No-Log Policies: VPN providers' policies on not keeping logs of users' activities.
+
+Strong Encryption: The use of robust encryption methods to protect data.
+
+Kill Switch: A feature that disconnects the internet if the VPN connection drops.
+
+DNS Leak Protection: Measures to prevent DNS queries from being exposed outside the VPN.
+
+Preparation: Steps taken to prepare for potential security incidents.
+
+Incident Response Plan: A documented plan for responding to security incidents.
+
+Incident Response Team: A group of individuals responsible for managing security incidents.
+
+Communication Plan: A plan for communicating during and after a security incident.
+
+Detecting Incidents: Methods for discovering security incidents.
+
+Incident Classification: Categorizing incidents based on their severity and impact.
+
+Containment: Steps taken to limit the impact of a security incident.
+
+Short-term Containment: Immediate actions to stop the spread of an incident.
+
+Long-term Containment: Ongoing measures to control an incident.
+
+Eradication: The process of removing the cause of a security incident.
+
+Root Cause Analysis: Identifying the underlying cause of an incident.
+
+Removing Threats: Eliminating malicious software and other threats.
+
+Recovery: Steps taken to restore systems and operations after a security incident.
+
+System Restoration: Rebuilding and restoring affected systems.
+
+Data Recovery: Recovering lost or compromised data after a security incident.
+
+Lessons Learned: The process of analyzing and learning from security incidents to improve future responses.
+
+Post-Incident Review: A detailed analysis of the incident and the response to it.
+
+Improvement Plan: Recommendations and actions to prevent future incidents and improve response strategies.
+
+Emerging Technologies: New and evolving technologies that impact cybersecurity.
+
+AI in Cyber Security: The use of artificial intelligence to enhance security measures.
+
+Machine Learning: Algorithms that enable systems to learn from data and improve over time.
+
+Threat Detection: Using AI to identify and respond to security threats.
+
+Automated Response: AI-driven systems that automatically respond to security incidents.
+
+Quantum Computing: Advanced computing technology that leverages quantum mechanics.
+
+Quantum Cryptography: The use of quantum mechanics to secure data.
+
+Post-Quantum Cryptography: Cryptographic algorithms designed to be secure against quantum computing attacks.
+
+Blockchain Security: The protection of blockchain networks and applications.
+
+Smart Contracts: Self-executing contracts with the terms of the agreement directly written into code.
+
+Decentralized Applications (DApps): Applications that run on a blockchain network.
+
+Consensus Mechanisms: Methods used to achieve agreement on the state of the blockchain.
+
+Internet of Things (IoT) Security: The protection of interconnected devices and systems.
+
+Device Authentication: Verifying the identity of IoT devices.
+
+Secure Communication: Ensuring data transmitted between IoT devices is secure.
+
+Firmware Updates: Keeping IoT device software up to date to protect against vulnerabilities.
+
+Cloud Security: The protection of data, applications, and services in cloud environments.
+
+Shared Responsibility Model: The division of security responsibilities between cloud providers and customers.
+
+Cloud Access Security Brokers (CASBs): Security solutions that provide visibility and control over cloud applications.
+
+Secure Cloud Architecture: Designing cloud environments with security in mind.
