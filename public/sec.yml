@@ -20,6 +20,7 @@ colorFreezeLevel: 2
           - VirusTotal
           - PeStudio
           - Malware Bazaar
+          - Last Activity View - nirsoft
 
           - Process Management
             - Volatility
